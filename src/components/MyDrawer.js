@@ -11,6 +11,9 @@ import AllTabs from './AllTabs'
 import SavedScreen from './SavedScreen'
 import MyHeader from './MyHeader';
 import Login from './Login';
+import MyStack from './MyStack'
+import Register from './Register'
+import Home from './Home'
 const Drawer = createDrawerNavigator();
 
 function MyDrawer({navigation}, props){
@@ -21,7 +24,7 @@ function MyDrawer({navigation}, props){
       <Container> 
       
     <NavigationContainer >
-    <Drawer.Navigator initialRouteName="Tabs" 
+    <Drawer.Navigator initialRouteName="Home" 
     drawerType={dimensions.width >= 768 ? 'permanent' : 'front'}
     //hideStatusBar={true}
     drawerContentOptions={{
@@ -29,12 +32,15 @@ function MyDrawer({navigation}, props){
     backgroundColor: props.colorr? "#000000" : 'white'
       }}
       >
-        <Drawer.Screen name='login' component={Login} />
+      <Drawer.Screen name='login' component={Login} />
+      <Drawer.Screen name="Register" component={Register} />
       <Drawer.Screen name="Tabs" component={AllTabs} />
       <Drawer.Screen name="Saved articles" component={SavedScreen} />
-       
+      <Drawer.Screen name="Home" component={Home} />
 
+       
     </Drawer.Navigator>
+
   </NavigationContainer>
 
   </Container>

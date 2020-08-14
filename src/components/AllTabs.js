@@ -12,7 +12,8 @@ import Science from './Science'
 import Sports from './Sports'
 import Entertainment from './Entertainment'
 import MyHeader from './MyHeader'
-import { Container,Header, Title, Button, Left, Right, Body,Footer, FooterTab,Text,Content,Icon,Tab, Tabs, ScrollableTab} from 'native-base';
+import { Container,Header, Title, Button, Left, Right, Body,Footer, FooterTab,Text,Content,Tab,Icon, Tabs, ScrollableTab} from 'native-base';
+
 //import SplashScreen from 'react-native-splash-screen'
 import { IsEmpty, Map } from "react-lodash";
 import _, { stubFalse } from 'lodash';
@@ -21,7 +22,8 @@ import { Switch } from 'react-native-paper';
 import MySwitch from './MySwitch';
 import MyDrawer from './MyDrawer';
 import MyLottie from './MyLottie';
-
+import MyStack from './MyStack'
+import MySearchBar from './MySearchBar';
 
 class AllTabs extends React.Component{
   constructor(props){
@@ -51,10 +53,13 @@ onToggleSwitch = () => this.setState({
 });
 
 render(){
-  <MyDrawer colorr={this.state.isSwitchOn} />
+  // <MyDrawer colorr={this.state.isSwitchOn} />
+  
   return (
  
    <Container style={styles.container}>
+   
+
        {/* <MyLottie /> */}
              {/* #89d9c1 */}
             <Header androidStatusBarColor={this.state.isSwitchOn? '#000000': '#02b29f'} style={{display:'none'}} iosBarStyle={this.state.isSwitchOn? "light-content" : "dark-content"} style={{backgroundColor:this.state.isSwitchOn? '#000000': 'white'}}  leftComponent={{ icon: 'menu', color: 'white' }}>
@@ -70,12 +75,15 @@ render(){
             <Right />
     
   {/* <MySwitch /> */}
+  <Right/>
+  
+  
   <Switch 
   value={this.state.isSwitchOn} 
   onValueChange={this.onToggleSwitch}
 
   />
-            {/* <Button transparent onPress={()=>this.toggleF()}>
+             {/* <Button transparent onPress={()=>this.toggleF()}>
               <Icon
               type="MaterialIcons"
               name='brightness-4'
@@ -109,36 +117,37 @@ render(){
              
            
           </Header>
-   <Tabs renderTabBar={()=> <ScrollableTab />} tabBarUnderlineStyle={{borderBottomWidth:1}} >
-
-          <Tab heading="World" style={styles.tabs}  tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#900c3f', fontWeight: 'bold'}}>
+          {/* <MySearchBar /> */}
+   <Tabs renderTabBar={()=> <ScrollableTab style={{height:80}} />} tabBarUnderlineStyle={{borderBottomWidth:1}} >
+    
+          <Tab heading="World" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#900c3f', fontWeight: 'bold'}} titleFontSize = {{fontSize:"100"}}>
             <World color={this.state.isSwitchOn} />
           </Tab>
-          <Tab heading="General" style={styles.tabs} tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#89d9c1', fontWeight: 'bold'}}>   
+          <Tab heading="General"  tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#89d9c1', fontWeight: 'bold'}}>   
           <General   color={this.state.isSwitchOn} />
 
           </Tab>
-          <Tab heading="Business" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white", textColor:'red' }} activeTextStyle={{color: '#ff5f40', fontWeight: 'bold'}}>
+          <Tab heading="Business" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white" }} activeTextStyle={{color: '#ff5f40', fontWeight: 'bold'}} >
           <Business   color={this.state.isSwitchOn} /> 
           </Tab>
-          <Tab heading="Technology" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white", textColor:'red' }} activeTextStyle={{color: '#14b1ab', fontWeight: 'bold'}}>
+          <Tab heading="Technology" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white" }} activeTextStyle={{color: '#14b1ab', fontWeight: 'bold'}}>
             <Technology   color={this.state.isSwitchOn} />
           </Tab>
-          <Tab heading="Health" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white", textColor:'red' }} activeTextStyle={{color: '#5fdde5', fontWeight: 'bold'}}>
+          <Tab heading="Health" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white" }} activeTextStyle={{color: '#5fdde5', fontWeight: 'bold'}}>
             <Health color={this.state.isSwitchOn} />
           </Tab>
-          <Tab heading="Science" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white", textColor:'red' }} activeTextStyle={{color: '#ff9a76', fontWeight: 'bold'}}>
+          <Tab heading="Science" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white" }} activeTextStyle={{color: '#ff9a76', fontWeight: 'bold'}}>
             <Science   color={this.state.isSwitchOn} />
           </Tab>
-          <Tab heading="Sports" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white", textColor:'red' }} activeTextStyle={{color: '#844685', fontWeight: 'bold'}}>
+          <Tab heading="Sports" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#844685', fontWeight: 'bold'}}>
             <Sports   color={this.state.isSwitchOn} />
           </Tab>
-          <Tab heading="Entertainment" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white", textColor:'red' }} activeTextStyle={{color: '#dd7631', fontWeight: 'bold'}}>
+          <Tab heading="Entertainment" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{backgroundColor: "white"}} activeTextStyle={{color: '#dd7631', fontWeight: 'bold'}}>
             <Entertainment  color={this.state.isSwitchOn} />
           </Tab>
         </Tabs>
      
-       
+      
       </Container>
  
 
@@ -173,7 +182,8 @@ const styles = StyleSheet.create({
    
   },
  tabs:{
-   color:'red' 
+   color:'red',
+  
  }
   
 });

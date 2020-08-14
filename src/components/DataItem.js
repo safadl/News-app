@@ -1,24 +1,39 @@
 import React, {Component} from 'react';
-import{ListItem, Left,Body,Right,Thumbnail,Text,Icon} from 'native-base'
+import{ListItem, Left,Body,Right,Thumbnail,Text,Icon, CardItem} from 'native-base'
 import {Linking, TouchableOpacity,StyleSheet, TouchableHighlight,Modal,View,Button, Image, Share} from 'react-native'
 import moment from 'moment'
+import { Avatar, Card, Title, Paragraph,FAB } from 'react-native-paper';
 import Time from './time'
 import Contents from './Contents'
 import { WebView } from 'react-native-webview';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-export default class DataItem extends Component{
+ class DataItem extends Component{
 constructor(props){
     super(props);
     this.data=props.data;
+    this.fullData=props.data
     this.state={
+    //  y:Animated.value,
       showModal : false,
-      FillIcon:false
+      FillIcon:false,
+      search:'',
+      fullData:props.data
 
     }
 
 }
-
+// handleSearch = search => {
+//   console.log("text",search);
+//   const formatQuery = search.toLowerCase();
+//   const data = _.filter(this.state.fullData,article => {
+//    if(this.data.title.includes(formatQuery)){
+//      return true
+//    }
+//    return false
+//   })
+//   this.setState({ search });
+// };
 hideModal(){
   this.setState({
     showModal:!this.state.showModal
@@ -45,35 +60,61 @@ IconVisible(){
      
 <View >
 
-<ListItem style={{margin:10, borderRadius:15, backgroundColor:'rgba(0,0,0,0.2)', alignSelf:'center'}}>
+<ListItem style={{ alignSelf:'center', borderColor:'black'}}>
+{/* style={{margin:10, borderRadius:15, backgroundColor:'rgba(0,0,0,0.2)', alignSelf:'center'}} */}
 {/* <Left>
   <Thumbnail square style={{StyleSheet.absoluteFill}} source={{ uri:this.data.urlToImage != null ? this.data.urlToImage : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAG1BMVEXMzMyWlpajo6PFxcW3t7ecnJyqqqq+vr6xsbGXmO98AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABPUlEQVRoge3Tv0/CQBjG8YcWaMcebymOENLI2MZoHMHEvVUKjq1K4lhM2Kvxx7/tUUiamDhc6GSez8INzbf3HleAiIiIiIiIiIiIiNozAGzvuJYTW2reXmso7bX8YN96HUR1a7RZ6+VVOgU+p4LuZGrSkqK0PWfwfl+3ht/hcpdvPkJ0g0fBYpYZtS7HttfPMatbAbZzJ1kjjnqVK1ihNzdpdX3b65S4qVsjXbG9EtuoEzliC/RbDFoIL7wY2NZrQayPzw1VpH/FUUqNjVrx0+9W8Rzrlt7yMMvMWq7fzHhoCTp6Rr0vw0uiH8+as69bov/AyNqf/Rms3Ky1aO7EYV93X2nlBIXg7WVSmrWs5q4eWrvVdYLbpR4/PTeZ8S9O82mdzMr7SVstV6mqrRaKh9ZSRERERERERET0n/wAZwMqI9kyPcoAAAAASUVORK5CYII=' }} /
 </Left> */}
 
-<Image  
+{/* <Image  
 style={[styles.image, StyleSheet.absoluteFill]} 
 source={{ uri:this.data.urlToImage || 'https://www.labaleine.fr/sites/default/files/image-not-found.jpg'}}
- /> 
+ />  */}
 {/* <View> style={styles.background} */}
-<View style={styles.overlay}/>
+<View />
 <View>
 <TouchableOpacity onPress={() =>this.setState({showModal : !this.state.showModal})} >
 <View style={{padding:10}}>
-
-      <Text style={{color:'white', padding:5,fontWeight:'bold',fontSize:20}} >{this.data.title}</Text>
-      <Text style={{color:'white', padding:5}} note numberOfLines={3}>{this.data.description} </Text>
+ 
+      {/* <Text style={{color:'white', padding:5,fontWeight:'bold',fontSize:20}} >{this.data.title}</Text> */}
+      {/* <Text style={{color:'white', padding:5}} note numberOfLines={3}>{this.data.description} </Text> */}
     
-    <View style={{padding:10}} >
+    {/* <View style={{padding:10}} >
           <Text note style={{color:"red"}}>{this.data.source.name}</Text>
           <Text style={{color:'white'}} note>{moment(this.data.publishedAt || moment.now()).fromNow()}</Text>
           
-      </View>
+      </View>  */}
 
+      <Card style={{ borderWidth:0.1}}>
+        {/* <Card.Title  left={(props) => <Avatar.Icon {...props} icon="heart"  />} /> */}
+    {/* <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} /> */}
+    <Card.Content>
+      <Title>{this.data.title}</Title>
+      <Paragraph>{this.data.description}</Paragraph>
+    
+    </Card.Content>
+    <Card.Cover source={{ uri: this.data.urlToImage }} />
+  <Card.Actions>
+  {/* <Avatar.Icon size={40} icon="heart"   /> */}
+ 
+  </Card.Actions>
+    {/* <Card.Actions>
+      <Button>View</Button>
+    </Card.Actions> */}
+  </Card>
+  <FAB
+    //style={styles.fab}
+    color={this.state.FillIcon? '#403f3c': 'white'}
+    icon="heart"
+    style={[styles.fab,{color: this.state.FillIcon? '#fb3958': 'white',marginLeft:5, marginBottom:0 }]}
+    onPress={()=>this.IconVisible()}   
+  />
+  
 </View>
 
 </TouchableOpacity>
 
-<Icon name="heart" style={{color: this.state.FillIcon? '#fb3958': 'white',marginLeft:5, marginBottom:0 }} type={this.state.FillIcon? "Entypo":"Feather" } onPress={()=>this.IconVisible()}/>
+{/* <Icon name="heart" style={{color: this.state.FillIcon? '#fb3958': 'white',marginLeft:5, marginBottom:0 }} type={this.state.FillIcon? "Entypo":"Feather" } onPress={()=>this.IconVisible()}/> */}
 </View>
 </ListItem>
 {/* <View > 
@@ -122,6 +163,13 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
   },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+   
+  },
   submit:{
     
    // backgroundColor:'#68a0cf',
@@ -147,3 +195,4 @@ const styles = StyleSheet.create({
     
   }
 })
+export default DataItem

@@ -21,21 +21,49 @@ import {ScrollView, StyleSheet,StatusBar, TouchableOpacity, NativeModules,proces
 //import {DrawerNavigator} from 'react-navigation'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import MyDrawer from './src/components/MyDrawer';
 import MyHeader from './src/components/MyHeader';
-
+import Register from './src/components/Register'
+import Login from './src/components/Login'
+import MyStack from './src/components/MyStack'
+import AllTabs from './src/components/AllTabs'
+// import {AuthProvider} from './src/components/AuthProvider';
+// import {useAuth} from './src/components/AuthProvider';
 const Drawer = createDrawerNavigator();
 
+// function AppBody() {
+//   const {user, logOut} = useAuth();
+//   return (
+//     <>
+//       <StatusBar barStyle="dark-content" />
+      
+//         <View>
+//           {user == null ? (
+//             <LogInView />
+//           ) : (
+//             <Button onPress={logOut} title="Log Out" />
+//           )}
+//         </View>
+     
+//     </>
+//   );
+// }
 class App extends React.Component{
   
 render(){
+  //const Stack = createStackNavigator();
 
   return (
-    <Container>
+  //   <AuthProvider>
+  // {/* <MyDrawer /> */}
+  // <AppBody />
+  // </AuthProvider>
 
-<MyDrawer />
-    </Container>
-  
+   <Container>
+     <MyDrawer/>
+   </Container> 
+ 
   );
 }
 };
