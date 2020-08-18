@@ -39,6 +39,7 @@
     "react-native-screens": "^2.10.1",
     "react-native-splash-screen": "^3.2.0",
     "react-native-switch": "^2.0.0",
+    "react-native-tab-view": "^2.15.1",
     "react-native-vector-icons": "^7.0.0",
     "react-native-webview": "^10.4.0",
     "react-navigation": "^4.4.0",
@@ -60,5 +61,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }

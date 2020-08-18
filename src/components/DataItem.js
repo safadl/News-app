@@ -89,11 +89,16 @@ source={{ uri:this.data.urlToImage || 'https://www.labaleine.fr/sites/default/fi
         {/* <Card.Title  left={(props) => <Avatar.Icon {...props} icon="heart"  />} /> */}
     {/* <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} /> */}
     <Card.Content>
-      <Title>{this.data.title}</Title>
-      <Paragraph>{this.data.description}</Paragraph>
-    
+      <Title style={{fontSize:22,marginBottom:10}}>{this.data.title}</Title>
+      {/* <Paragraph>{this.data.description}</Paragraph> */}
+   
     </Card.Content>
     <Card.Cover source={{ uri: this.data.urlToImage }} />
+    <View style={{padding:10}} >
+          <Text note style={{color:"red"}}>{this.data.source.name}</Text>
+          <Text style={{color:'black'}} note>{moment(this.data.publishedAt || moment.now()).fromNow()}</Text>
+          
+      </View>
   <Card.Actions>
   {/* <Avatar.Icon size={40} icon="heart"   /> */}
  

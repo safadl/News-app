@@ -18,21 +18,24 @@ import { Container,Header, Title, Button, Left, Right, Body,Footer, FooterTab,Te
 import { IsEmpty, Map } from "react-lodash";
 import _, { stubFalse } from 'lodash';
 import {ScrollView, StyleSheet,StatusBar, TouchableOpacity, NativeModules,processColor, View} from 'react-native';
-import { Switch } from 'react-native-paper';
+import { Switch,FAB, Avatar } from 'react-native-paper';
 import MySwitch from './MySwitch';
 import MyDrawer from './MyDrawer';
 import MyLottie from './MyLottie';
 import MyStack from './MyStack'
 import MySearchBar from './MySearchBar';
-
+import Home from './Home'
+import BottomNavigation from './MyBottomNavigation'
 class AllTabs extends React.Component{
   constructor(props){
     super(props);
     this.state={
       toggle:true,
-      isSwitchOn:false
+      isSwitchOn:false,
+      activeTab:props.ActPage
 
-    }  }
+    }  
+  }
  componentDidMount(){
     
      // SplashScreen.hide();
@@ -51,10 +54,20 @@ console.log(this.state.toggle)
 onToggleSwitch = () => this.setState({
   isSwitchOn:!this.state.isSwitchOn
 });
+ChangePage=()=>{
+  this.setState({
+    activeTab:2
+  })
+}
+// passprops=()=>{
+//   return(
+//     <Home funct={this.changePage} />
+//   )
+// }
 
 render(){
   // <MyDrawer colorr={this.state.isSwitchOn} />
-  
+  <Home Apage={this.state.activeTab}/>
   return (
  
    <Container style={styles.container}>
@@ -73,7 +86,9 @@ render(){
               </Button>
              </Left>
             <Right />
-    
+            {/* <Body>
+            <Title style={{fontSize:21, color:this.state.isSwitchOn? 'white': 'black'}}>For you</Title>
+          </Body> */}
   {/* <MySwitch /> */}
   <Right/>
   
@@ -117,11 +132,14 @@ render(){
              
            
           </Header>
+          
           {/* <MySearchBar /> */}
-   <Tabs renderTabBar={()=> <ScrollableTab style={{height:80}} />} tabBarUnderlineStyle={{borderBottomWidth:1}} >
-    
+   <Tabs   ref={c=> this.tabs = c} 
+   renderTabBar={()=> <ScrollableTab style={{height:80}} />} tabBarUnderlineStyle={{borderBottomWidth:1}} page={this.state.activeTab} >
+ 
           <Tab heading="World" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#900c3f', fontWeight: 'bold'}} titleFontSize = {{fontSize:"100"}}>
             <World color={this.state.isSwitchOn} />
+   {/* <Button onPress={this.changePage}><Text>Press</Text></Button> */}
           </Tab>
           <Tab heading="General"  tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#89d9c1', fontWeight: 'bold'}}>   
           <General   color={this.state.isSwitchOn} />
@@ -147,7 +165,6 @@ render(){
           </Tab>
         </Tabs>
      
-      
       </Container>
  
 

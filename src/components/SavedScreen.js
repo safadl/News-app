@@ -9,7 +9,7 @@ class SavedScreen extends Component {
     render() {
         return (
     
-<Text>home</Text>    
+<Text>saved articles</Text>    
         );
     }
 }

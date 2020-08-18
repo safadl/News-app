@@ -20,7 +20,7 @@ import {ScrollView, StyleSheet,StatusBar, TouchableOpacity, NativeModules,proces
 
 //import {DrawerNavigator} from 'react-navigation'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer,DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MyDrawer from './src/components/MyDrawer';
 import MyHeader from './src/components/MyHeader';
@@ -28,6 +28,8 @@ import Register from './src/components/Register'
 import Login from './src/components/Login'
 import MyStack from './src/components/MyStack'
 import AllTabs from './src/components/AllTabs'
+import Home from './src/components/Home'
+import {PaperProvider} from 'react-native-paper'
 // import {AuthProvider} from './src/components/AuthProvider';
 // import {useAuth} from './src/components/AuthProvider';
 const Drawer = createDrawerNavigator();
@@ -53,6 +55,7 @@ class App extends React.Component{
   
 render(){
   //const Stack = createStackNavigator();
+  const Stack = createStackNavigator();
 
   return (
   //   <AuthProvider>
@@ -61,7 +64,21 @@ render(){
   // </AuthProvider>
 
    <Container>
+     {/* <NavigationContainer>
+
+<Stack.Navigator>
+<Stack.Screen name="AllTabs" component={AllTabs} />
+
+<Stack.Screen name="Home" component={Home} />
+
+</Stack.Navigator>
+</NavigationContainer> */}
      <MyDrawer/>
+     {/* <PaperProvider>
+      <NavigationContainer>
+        <Main />
+      </NavigationContainer>
+    </PaperProvider> */}
    </Container> 
  
   );
