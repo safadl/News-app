@@ -155,15 +155,13 @@ import {
   FlatList,
   Dimensions,
   Animated,
- 
+ Text,
   View,
   StyleSheet,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
+
   SafeAreaView,
   
 } from 'react-native';
-import {Appbar,Button} from 'react-native-paper'
 const { width } = Dimensions.get('screen');
 import {
   FlingGestureHandler,
@@ -179,14 +177,8 @@ import tech from '../images/tech.png'
 import enter from '../images/enter.png'
 import world from '../images/world.png'
 import general from '../images/general.png'
-import World from './World';
-import General from './General';
-import Technology from './Technology';
-import Entertainment from './Entertainment';
-import MyDrawer from './MyDrawer'
-import AllTabs from './AllTabs'
-import { Container,Header, Title, Left, Right, Body,Footer, FooterTab,Text,Content,Tab,Icon, Tabs, ScrollableTab} from 'native-base';
-
+import AllTabs from './AllTabs';
+import { ChangePage } from '../redux/actions';
 // https://www.creative-flyers.com
 const BusinessImageUri= Image.resolveAssetSource(Business).uri
 const HealthImageUri= Image.resolveAssetSource(Health).uri
@@ -196,17 +188,23 @@ const techImageUri= Image.resolveAssetSource(tech).uri
 const enterImageUri= Image.resolveAssetSource(enter).uri
 const worldImageUri= Image.resolveAssetSource(world).uri
 const generalImageUri= Image.resolveAssetSource(general).uri
-
-
-
+const pressed0=0;
+const pressed1=1;
+const pressed2=2;
+const pressed3=3;
+const pressed4=4;
+const pressed5=5;
+const pressed6=6;
+const pressed7=7;
+const page=0;
 const DATA = [
   {
     title: 'World',
    
     poster:
-    worldImageUri
+    worldImageUri,
       //'https://www.creative-flyers.com/wp-content/uploads/2020/07/Afro-vibes-flyer-template.jpg',
-      ,pressed:1,
+      pressed:pressed0,
       color:'#51bcea'
   },
   {
@@ -215,7 +213,8 @@ const DATA = [
     poster:
     generalImageUri
     //  'https://www.creative-flyers.com/wp-content/uploads/2019/11/Jungle-Party-Flyer-Template-1.jpg',
-    ,pressed:2,
+    ,pressed:pressed1,
+   
     color:'#c4db6c'
   },
   {
@@ -226,7 +225,7 @@ const DATA = [
     //'https://image.freepik.com/free-vector/business-team-discussing-ideas-startup_74855-4380.jpg'
        //  'https://freeui.design/wp-content/uploads/2018/06/Business-Couple-Illustration-by-Tran-Mau-Tri-Tam-FreeUI.Design-Cover-1200x900.jpg'
       //'https://images.unsplash.com/photo-1570126618953-d437176e8c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=426&q=80',
-      ,pressed:3,
+      ,pressed:pressed2,
       color:'#c41111'
     },
   {
@@ -235,7 +234,7 @@ const DATA = [
     poster:
     techImageUri
       //'https://www.creative-flyers.com/wp-content/uploads/2020/07/Summer-Music-Festival-Poster.jpg',
-      ,pressed:4,
+      ,pressed:pressed3,
       color:'#11a6ab'
       },
   {
@@ -244,7 +243,7 @@ const DATA = [
     poster:
     HealthImageUri
      // 'https://www.creative-flyers.com/wp-content/uploads/2020/06/BBQ-Flyer-Psd-Template.jpg',
-     ,pressed:5,
+     ,pressed:pressed4,
      color:'#5dc3cc'
   },
   {
@@ -253,7 +252,7 @@ const DATA = [
     poster:
     SienceImageUri
      // 'https://www.creative-flyers.com/wp-content/uploads/2020/06/Festival-Music-PSD-Template.jpg',
-     ,pressed:6,
+     ,pressed:pressed5,
      color:'#e47070'
   },
   {
@@ -263,7 +262,7 @@ const DATA = [
     SportsImageUri
    // 'https://static.vecteezy.com/system/resources/previews/000/450/931/non_2x/happy-woman-running-in-the-park-vector-illustration-in-flat-style-concept-illustration-for-healthy-lifestyle-sport-exercising.jpg'
      // 'https://www.creative-flyers.com/wp-content/uploads/2020/06/Summer-Beach-House-Flyer.jpg',
-     ,pressed:7,
+     ,pressed:pressed6,
      color:'#b460cc'
   },
   {
@@ -272,7 +271,7 @@ const DATA = [
     poster:
     enterImageUri
     //  'https://www.creative-flyers.com/wp-content/uploads/2020/06/Summer-Beach-House-Flyer.jpg',
-    ,pressed:8,
+    ,pressed:pressed7,
     color:'#e1691f'
   },
 ];
@@ -282,6 +281,7 @@ const SPACING = 10;
 const ITEM_WIDTH = width * 0.70;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.5;
 const VISIBLE_ITEMS = 3;
+
 
 const OverflowItems = ({ data, scrollXAnimated }) => {
   const inputRange = [-1, 0, 1];
@@ -299,18 +299,7 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
               <Text style={[styles.title,{color:item.color} ]} numberOfLines={1}>
                 {item.title}
               </Text>
-              <View style={styles.itemContainerRow}>
-                {/* <Text style={[styles.location]}> */}
-                  {/* <EvilIcons
-                    name='location'
-                    size={16}
-                    color='black'
-                    style={{ marginRight: 5 }}
-                  /> */}
-                  {/* {item.location}
-                </Text> */}
-                {/* <Text style={[styles.date]}>{item.date}</Text> */}
-              </View>
+              
             </View>
           );
         })}
@@ -320,22 +309,30 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
 };
 
 
-export default function Home({navigation}) {
+ function Home( {navigation,props} ) {
   const [data, setData] = React.useState(DATA);
   const scrollXIndex = React.useRef(new Animated.Value(0)).current;
   const scrollXAnimated = React.useRef(new Animated.Value(0)).current;
   const [index, setIndex] = React.useState(0);
-  const _goBack = () => console.log('Went back');
+  //const _goBack = () => console.log('Went back');
 
-  const _handleSearch = () => console.log('Searching');
+  //const _handleSearch = () => console.log('Searching');
 
-  const _handleMore = () => console.log('Shown more');
-  const [page,setPage] = React.useState(0);
+  //const _handleMore = () => console.log('Shown more');
+  //const [page,setPage] = React.useState(0);
   const setActiveIndex = React.useCallback((activeIndex) => {
     scrollXIndex.setValue(activeIndex);
     setIndex(activeIndex);
   });
- 
+
+//   whatPage= pagee  = {
+//     setState({
+//         orderId
+//     });
+// }
+
+
+
   React.useEffect(() => {
     if (index === data.length - VISIBLE_ITEMS - 1) {
       // get new data
@@ -382,20 +379,24 @@ export default function Home({navigation}) {
 
         <SafeAreaView style={styles.container}>
        
-        <Appbar.Header style={{backgroundColor:'white', marginLeft:Dimensions.get('window').width*0.18, marginBottom:10,marginTop:10}}>
+        {/* <Appbar.Header style={{backgroundColor:'white', marginLeft:Dimensions.get('window').width*0.18, marginBottom:10,marginTop:10}}>
       {/* <Appbar.BackAction onPress={_goBack} /> */}
-      <Appbar.Content title="CATEGORIES" titleStyle={{fontSize:25,letterSpacing:5,fontWeight:'bold'}}  />
+      {/* <Appbar.Content title="CATEGORIES" titleStyle={{fontSize:25,letterSpacing:5,fontWeight:'bold'}}  /> */}
       {/* <Appbar.Action icon="magnify" onPress={_handleSearch} /> */}
       {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}
-    </Appbar.Header> 
+    {/* </Appbar.Header>   */}
       {/* #89d9c1 */}
      
           
           <StatusBar hidden />
          
           <OverflowItems data={data} scrollXAnimated={scrollXAnimated}  />
-          
+          {/* <Button labelStyle={{color:'#02b29f'}}style={{width:200, borderColor:'#02b29f'}}icon="newspaper" mode="outlined" onPress={()=>navigation.navigate('tabs')}>
+                  Go to articles
+                </Button> */}
+
         <FlatList
+        
             data={data}
             keyExtractor={(_, index) => String(index)}
             horizontal
@@ -431,6 +432,9 @@ export default function Home({navigation}) {
               );
             }}
             renderItem={({ item, index }) => {
+
+              const p=3;
+
               const inputRange = [index - 1, index, index + 1];
               const translateX = scrollXAnimated.interpolate({
                 inputRange,
@@ -447,7 +451,7 @@ export default function Home({navigation}) {
               
               return (
                 <Animated.View
-                onPress={()=>console.log('pressed')}
+
                   style={{
                     position: 'absolute',
                     left: -ITEM_WIDTH / 2,
@@ -461,9 +465,9 @@ export default function Home({navigation}) {
                     ],
                   }}
                 >   
-                    
-                    {/* <TouchableHighlight style={{ width: ITEM_WIDTH,
-                  height: ITEM_HEIGHT, borderRadius: 14, }} onPress={setPage(item.pressed)}> */}
+                    {/* <AllTabs isPressed={item.pressed}/> */}
+                    <TouchableHighlight style={{ width: ITEM_WIDTH,
+                  height: ITEM_HEIGHT, borderRadius: 14, }} onPress={()=> navigation.navigate('tabs')} >
                   <Image
                //   source={require('../images/Business.png')}
                     source={ {uri:item.poster}}
@@ -472,10 +476,9 @@ export default function Home({navigation}) {
                       height: ITEM_HEIGHT,
                       borderRadius: 14,                   
                     }}
-                      
                   />
-                  {/* </TouchableHighlight> */}
-                
+                  </TouchableHighlight>
+
                 </Animated.View>
                 
               )
@@ -483,9 +486,7 @@ export default function Home({navigation}) {
             }}
           />
               <View style={{justifyContent:'center',flexDirection:'row',marginBottom:15,color:'red'}}>
-              <Button labelStyle={{color:'#02b29f'}}style={{width:200, borderColor:'#02b29f'}}icon="newspaper" mode="outlined" onPress={() => navigation.navigate('AllTabs')}>
-                  Go to articles
-                </Button>
+            
                 </View>
         </SafeAreaView>
         
@@ -498,16 +499,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    //backgroundColor: '#fff',
     
   },
   title: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight:'800',
     textTransform: 'uppercase',
     letterSpacing: 3,
     fontFamily:'DeliusUnicase-Bold',
-    
+    //marginLeft:115,
+     marginTop:50
   },
 //   location: {
 //     fontSize: 16,
@@ -518,7 +520,9 @@ const styles = StyleSheet.create({
   itemContainer: {
     height: OVERFLOW_HEIGHT,
     padding: SPACING * 3,
- 
+    justifyContent:'center',
+    alignItems:'center',
+    //flex:1 
   },
   itemContainerRow: {
     flexDirection: 'row',
@@ -530,3 +534,4 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 });
+export default Home;

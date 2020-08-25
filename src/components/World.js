@@ -1,13 +1,10 @@
 import React from 'react'
-import {StyleSheet, View, Text,Alert, ActivityIndicator,ScrollView, Modal,Dimensions, FlatList} from 'react-native';
-import { SearchBar,Icon } from 'react-native-elements';
-
-import {List , Button , ListItem,Left, Body,Right, Thumbnail,Container, Content } from 'native-base'
+import {StyleSheet, View,Alert, ActivityIndicator,Dimensions, FlatList} from 'react-native';
+import { SearchBar,Icon} from 'react-native-elements';
+import {Container, Content } from 'native-base'
 import {getArticles} from './service/news'
 import DataItem from './DataItem'
-//import MySearchBar from './MySearchBar';
 import _ from 'lodash'
-//const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 class World extends React.Component{
     constructor(props){

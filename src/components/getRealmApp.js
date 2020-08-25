@@ -1,8 +1,8 @@
-// import Realm from 'realm';
+import Realm from 'realm';
 
-// let app;
+let app;
 
-// // Returns the shared instance of the Realm app.
+// Returns the shared instance of the Realm app.
 // export function getRealmApp() {
 //   if (app === undefined) {
 
@@ -16,7 +16,16 @@
 //         version: '0',
 //       },
 //     };
-//     app = new Realm.App(appConfig);
+
+//     app =  new Realm.App(this.appConfig);
 //   }
 //   return app;
 // }
+export function getRealmApp() {
+    const appId = 'newsapp-iefmu'; // Set Realm app ID here.
+    const appConfig = {
+      id: appId,
+      timeout: 10000,
+    };
+   return new Realm.App(appConfig);
+ }

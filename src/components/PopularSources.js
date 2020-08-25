@@ -19,7 +19,8 @@ import {StyleSheet, View,Alert, ActivityIndicator,ScrollView,Dimensions,FlatList
 import {List , Button , ListItem,Left, Body,Right, Thumbnail,Container, Content } from 'native-base'
 import {getArticlesSources} from './service/Sources'
 import DataItem from './DataItem'
-import DataSources from './DataSources';
+import DrawerSources from './DrawerSources';
+import {useTheme} from '@react-navigation/native'
 import { Avatar, Card, Title, Paragraph,FAB } from 'react-native-paper';
 import {
     DrawerItem,
@@ -31,6 +32,8 @@ import {
     Text,
     TouchableRipple,
   } from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 class PopularSources extends React.Component{
     constructor(props){
         super(props);
@@ -54,20 +57,20 @@ class PopularSources extends React.Component{
         })
     }
     render(){
+
       //  console.log("data : ",this.state.data);
     let view = this.state.isLoading ? (
-        <View style={{justifyContent:'center', textAlign:'center'}}> 
+        <View  style={{justifyContent:'center', textAlign:'center'}}> 
 <ActivityIndicator style={{margin:Dimensions.get('window').height/8}} animating={this.state.isLoading} color='#89d9c1'size='large'/>
         </View>
     ) : 
     ( 
         <View >
-
         <FlatList 
         data={this.state.data}
         renderItem={({item}) => {
             return(
-                <DataSources  data={item}  />
+                <DrawerSources  data={item}  />
                
             );
         }
@@ -86,15 +89,14 @@ class PopularSources extends React.Component{
               }
             >
       
-              <View style={styles.userInfoSection}>
+              <View  style={styles.userInfoSection}>
             
       
-              <Drawer.Section  title="Sources" >
+              <Drawer.Section title="Popular Sources" >
                
                   <View style={styles.preference}>
                  
-                    <View pointerEvents="none">
-                    
+                    <View  >
                     {view}
                     
                     </View>

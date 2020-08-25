@@ -1,8 +1,4 @@
-
-//import 'react-native-gesture-handler';
-import React from 'react';
-/*import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';*/
+import React,{Component} from 'react';
 import World from './World';
 import General from './General';
 import Business from './Business'
@@ -11,70 +7,70 @@ import Technology from './Technology'
 import Science from './Science'
 import Sports from './Sports'
 import Entertainment from './Entertainment'
-import MyHeader from './MyHeader'
-import { Container,Header, Title, Button, Left, Right, Body,Footer, FooterTab,Text,Content,Tab,Icon, Tabs, ScrollableTab} from 'native-base';
+import {Container,Header, Button, Left, Right,Tab,Icon, Tabs, ScrollableTab} from 'native-base';
+import {NativeModules,processColor,StyleSheet,Text} from 'react-native';
+import {Switch} from 'react-native-paper';
 
-//import SplashScreen from 'react-native-splash-screen'
-import { IsEmpty, Map } from "react-lodash";
-import _, { stubFalse } from 'lodash';
-import {ScrollView, StyleSheet,StatusBar, TouchableOpacity, NativeModules,processColor, View} from 'react-native';
-import { Switch,FAB, Avatar } from 'react-native-paper';
-import MySwitch from './MySwitch';
-import MyDrawer from './MyDrawer';
-import MyLottie from './MyLottie';
-import MyStack from './MyStack'
-import MySearchBar from './MySearchBar';
-import Home from './Home'
-import BottomNavigation from './MyBottomNavigation'
-class AllTabs extends React.Component{
+
+export default class AllTabs extends Component{
   constructor(props){
     super(props);
+   
     this.state={
       toggle:true,
       isSwitchOn:false,
-      activeTab:props.ActPage
+     // MyactiveTab:this.props.isPressed
+    active:this.props.isPressed
 
     }  
   }
  componentDidMount(){
-    
      // SplashScreen.hide();
     const { StatusBarManager } = NativeModules;
+   
+    StatusBarManager.setColor(processColor('red'), false);
+    // setTimeout(() => {
+    //   this.setState({
+    //     MyactiveTab:this.props.isPressed
+    //    });
+    // }, 1000);
+    setTimeout(this.tabs.goToPage.bind(this.tabs, this.props.isPressed));
+  
 
-     StatusBarManager.setColor(processColor('red'), false);
-    
   }
+ 
+ 
+  // componentWillUpdate(){
+  //   this.setState({
+  //     activeTab:this.props.pressed
+  //   })
+  // }
   toggleF(){
     this.setState({
   toggle:!this.state.toggle 
 })
 console.log(this.state.toggle)
 }
-
+// changePage(page){ 
+//   this.setState({
+//     activeTab:page
+//   })
+// }
 onToggleSwitch = () => this.setState({
   isSwitchOn:!this.state.isSwitchOn
 });
-ChangePage=()=>{
-  this.setState({
-    activeTab:2
-  })
-}
-// passprops=()=>{
-//   return(
-//     <Home funct={this.changePage} />
-//   )
+// changePage = (page)=>{
+//   this.tabs.goToPage(props.pressed)
+ 
 // }
 
 render(){
   // <MyDrawer colorr={this.state.isSwitchOn} />
-  <Home Apage={this.state.activeTab}/>
+ 
   return (
  
    <Container style={styles.container}>
-   
-
-       {/* <MyLottie /> */}
-             {/* #89d9c1 */}
+{/*    
             <Header androidStatusBarColor={this.state.isSwitchOn? '#000000': '#02b29f'} style={{display:'none'}} iosBarStyle={this.state.isSwitchOn? "light-content" : "dark-content"} style={{backgroundColor:this.state.isSwitchOn? '#000000': 'white'}}  leftComponent={{ icon: 'menu', color: 'white' }}>
             <Left>
               <Button transparent >
@@ -86,60 +82,21 @@ render(){
               </Button>
              </Left>
             <Right />
-            {/* <Body>
-            <Title style={{fontSize:21, color:this.state.isSwitchOn? 'white': 'black'}}>For you</Title>
-          </Body> */}
-  {/* <MySwitch /> */}
+          
   <Right/>
   
   
   <Switch 
   value={this.state.isSwitchOn} 
   onValueChange={this.onToggleSwitch}
+  />  
+          </Header> */}
+   <Tabs   ref={(c)=> {this.tabs = c;return;} }
+   renderTabBar={()=> <ScrollableTab style={{height:80}} />} tabBarUnderlineStyle={{borderBottomWidth:1}} >
 
-  />
-             {/* <Button transparent onPress={()=>this.toggleF()}>
-              <Icon
-              type="MaterialIcons"
-              name='brightness-4'
-              color='#ffff'/>
-             </Button> */}
-    {/* <Switch
-    value={true}
-    onValueChange={(val) => console.log(val)}
-    disabled={true}
-    activeText={'On'}
-    inActiveText={'Off'}
-    // circleSize={30}
-    // barHeight={1}
-    //circleBorderWidth={3}
-    backgroundActive={'white'}
-    //backgroundInactive={'gray'}
-   // circleActiveColor={'#30a566'}
-    //circleInActiveColor={'#000000'}
-    changeValueImmediately={true}
-    // renderInsideCircle={() => <CustomComponent />} // custom component to render inside the Switch circle (Text, Image, etc.)
-    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-    innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-    outerCircleStyle={{}} // style for outer animated circle
-    renderActiveText={false}
-    renderInActiveText={false}
-    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-    switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
-    switchBorderRadius={30} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
-  /> */}
-             
-           
-          </Header>
-          
-          {/* <MySearchBar /> */}
-   <Tabs   ref={c=> this.tabs = c} 
-   renderTabBar={()=> <ScrollableTab style={{height:80}} />} tabBarUnderlineStyle={{borderBottomWidth:1}} page={this.state.activeTab} >
- 
           <Tab heading="World" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#900c3f', fontWeight: 'bold'}} titleFontSize = {{fontSize:"100"}}>
+
             <World color={this.state.isSwitchOn} />
-   {/* <Button onPress={this.changePage}><Text>Press</Text></Button> */}
           </Tab>
           <Tab heading="General"  tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#89d9c1', fontWeight: 'bold'}}>   
           <General   color={this.state.isSwitchOn} />
@@ -148,6 +105,7 @@ render(){
           <Tab heading="Business" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white" }} activeTextStyle={{color: '#ff5f40', fontWeight: 'bold'}} >
           <Business   color={this.state.isSwitchOn} /> 
           </Tab>
+         
           <Tab heading="Technology" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white" }} activeTextStyle={{color: '#14b1ab', fontWeight: 'bold'}}>
             <Technology   color={this.state.isSwitchOn} />
           </Tab>
@@ -166,10 +124,6 @@ render(){
         </Tabs>
      
       </Container>
- 
-
-   
-
 
   );
 }
@@ -205,4 +159,3 @@ const styles = StyleSheet.create({
   
 });
 
-export default AllTabs;

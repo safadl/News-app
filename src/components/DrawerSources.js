@@ -4,59 +4,34 @@ import {Linking, TouchableOpacity,StyleSheet, TouchableHighlight,Modal,View,Butt
 import moment from 'moment'
 
 import { Avatar, Card, Title, Paragraph,FAB } from 'react-native-paper';
-import Time from './time'
-import Contents from './Contents'
-import { WebView } from 'react-native-webview';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
- class DataSources extends Component{
+ class DrawerSources extends Component{
 constructor(props){
-    super(props);
+    super(props)
     this.data=props.data;
     this.fullData=props.data
     this.state={
-    //  y:Animated.value,
-      showModal : false,
-      FillIcon:false,
-      search:'',
-      fullData:props.data
+     
+      
+      fullData:props.data,
 
     }
 
-}
-
-
-  render(){
-      return(
+} 
+render(){
+  return(
      
 <View >
-<ListItem style={{ borderColor:'black'}}>
+<ListItem  style={{ borderColor:'black'}}>
 
 <View />
 <View>
-<TouchableOpacity >
-<View style={{padding:3,flexDirection:'row'}}>
- 
-  <Icon  style={{width:40}}name='md-newspaper-outline' />
-      <Title style={{fontSize:15}}>{this.data.name}</Title>
-      {/* <Paragraph>{this.data.description}</Paragraph> */}
-
-
- 
-   
-
-  
-  
-</View>
-
+<TouchableOpacity  onPress={()=>this.props.navigation.navigate("finalSources")} style={{padding:3,flexDirection:'row'}}>
+  <Icon   style={{width:40}}name='md-newspaper-outline' />
+  <Title  style={{fontSize:15}}>{this.data.name}</Title>
 </TouchableOpacity>
 </View>
 </ListItem>
-{/* <View > 
-<Image source= />
-</View> */}
-
-  
 </View>
       )
   }  
@@ -109,4 +84,4 @@ const styles = StyleSheet.create({
     
   }
 })
-export default DataSources
+export default DrawerSources

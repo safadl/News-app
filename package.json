@@ -15,6 +15,7 @@
     "@mdi/js": "^5.5.55",
     "@mdi/react": "^1.4.0",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/bottom-tabs": "^5.8.0",
     "@react-navigation/drawer": "^5.9.0",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
@@ -44,7 +45,7 @@
     "react-native-webview": "^10.4.0",
     "react-navigation": "^4.4.0",
     "react-redux": "^7.2.1",
-    "realm": "^6.0.4",
+    "realm": "^10.0.0-beta.6",
     "redux": "^4.0.5",
     "rn-progressive-image": "^1.2.0",
     "underscore": "^1.10.2"

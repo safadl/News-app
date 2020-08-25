@@ -16,6 +16,7 @@ import com.facebook.soloader.SoLoader;
 import com.facebook.react.shell.MainReactPackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import io.realm.react.RealmReactPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNGestureHandlerPackage();
             new VectorIconsPackage();
             new RNCWebViewPackage();
+            new RealmReactPackage();
         //packages.add(new SplashScreenReactPackage());
       
             return packages;

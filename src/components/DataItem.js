@@ -4,7 +4,6 @@ import {Linking, TouchableOpacity,StyleSheet, TouchableHighlight,Modal,View,Butt
 import moment from 'moment'
 import { Avatar, Card, Title, Paragraph,FAB } from 'react-native-paper';
 import Time from './time'
-import Contents from './Contents'
 import { WebView } from 'react-native-webview';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
