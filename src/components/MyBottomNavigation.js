@@ -17,6 +17,7 @@ import DrawerSources from './DrawerSources'
 import finalSources from './finalSources'
 import PopularSources from './PopularSources'
 import MyDStack from './MyDStack'
+import Register from './Register'
 //import StackNav from './MyStack'
 const Stack = createStackNavigator();
 
@@ -159,6 +160,8 @@ const MyBottomTabNavigation = () => {
       <Tab.Screen name="Home" component={MyStack}  />
       <Tab.Screen name="Saved" component={SavedScreen} />
       <Tab.Screen name="Account" component={Login} />
+      <Tab.Screen name="Register" component={Register} />
+
 
     </Tab.Navigator>
   );
