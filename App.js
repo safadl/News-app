@@ -12,25 +12,8 @@ import MyBottomNavigation from './src/components/MyBottomNavigation';
 import MyDrawer from './src/components/MyDrawer';
 import {Switch} from 'react-native-paper'
 import SplashScreen from 'react-native-splash-screen'
-import AuthProvider from './src/components/AuthProvider'
 import * as firebase from 'firebase'
-// function AppBody() {
-//   const {user, logOut} = useAuth();
-//   return (
-//     <>
-//       <StatusBar barStyle="dark-content" />
-      
-//         <View>
-//           {user == null ? (
-//             <LogInView />
-//           ) : (
-//             <Button onPress={logOut} title="Log Out" />
-//           )}
-//         </View>
-     
-//     </>
-//   );
-// }
+
 var firebaseConfig = {
   apiKey: "AIzaSyCbMbs-UR4YD-IGXzulSE6Go52DMrNdkCE",
   authDomain: "newsapp-50623.firebaseapp.com",
@@ -48,6 +31,8 @@ firebase.initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
 
 export default function App(){
+  const [Mytheme,setTheme]= React.useState(false)
+
   console. disableYellowBox = true
   useEffect(()=>{
     SplashScreen.hide();
@@ -55,8 +40,8 @@ export default function App(){
   return (
 
 
-     <NavigationContainer theme={DefaultTheme}>
-<MyDrawer />
+ <NavigationContainer theme={Mytheme ? DarkTheme: DefaultTheme}>
+<MyDrawer theme={Mytheme}/>
 </NavigationContainer>
   );
 

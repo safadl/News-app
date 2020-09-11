@@ -1,30 +1,21 @@
 import React, { Component,useState } from 'react';
-import {View, Text,StyleSheet,TouchableOpacity} from 'react-native';
+import {View, Text,StyleSheet,TouchableOpacity,ScrollView} from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
 import * as firebase from 'firebase'
 
-// class Login extends Component {
-//     render() {
-//         return (
-//             <View style={styles.container}>
-//             </View>
-//         );
-//     }
-// }
 class Register extends Component{
-    // const [email, setEmail] = React.useState('');
-    // const [password,setPassword] =React.useState('');
-    // const [username,setUsername] =React.useState('');
-    // const [errorMessage,setErrorMessage]=useState("")
+  
 state={
   email:"",
   password:"",
   ursername:"",
-  errorMessage:null
+  errorMessage:null,
+  success:null
 }
 handleSignUp=()=>{
   firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password).then(
-    userCredentials=>{
+    this.setState({success:'Registration done successfully'}),
+        userCredentials=>{
       
       return userCredentials.user.updateProfile({
         displayName:this.state.username
@@ -37,13 +28,13 @@ handleSignUp=()=>{
 render(){
 
  return (
-    <View style={styles.container}>
+    <ScrollView  contentContainerStyle={styles.container}>
         <View style={styles.textContainer}>
      <Text style={styles.text}>Register</Text> 
    </View>
  <View style={styles.input}>
  <View style={styles.errorMessage}>
- {this.state.errorMessage&&<Text style={styles.error}>{this.state.errorMessage}</Text>}
+ {this.state.errorMessage&&<Text style={styles.error}>{this.state.errorMessage}</Text>||<Text style={{color:'green'}}>{this.state.success}</Text>}
    </View>
  <TextInput
         label="Username"
@@ -71,12 +62,16 @@ render(){
      </View>
      
   <View style={{alignItems:'center'}}>
-     <Button  mode="outlined" onPress={this.handleSignUp} style={{width:200, marginTop:20}} >
+     <Button  mode="outlined" onPress={this.handleSignUp} style={{width:200}} >
     Sign up
   </Button>
   
+  <Text style={{marginTop:15}}>Already have an account? </Text>
+  <TouchableOpacity onPress={()=>this.props.navigation.goBack() } >
+    <Text style={{color:'tomato',margin:15,fontWeight:'bold'}}>Login</Text>
+  </TouchableOpacity>
       </View>
-      </View>
+      </ScrollView>
     )
 }
 }

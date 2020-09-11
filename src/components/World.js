@@ -4,31 +4,29 @@ import { SearchBar,Icon} from 'react-native-elements';
 import {Container, Content } from 'native-base'
 import {getArticles} from './service/news'
 import DataItem from './DataItem'
-import _ from 'lodash'
-
+import _ from 'lodash' 
+import {MyTheme} from './themes'
 class World extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            // isLoading:true,
-            // data:null,
+            
             query: "",
             error:null,
             isLoading:false,
             data:[],
-            fullData:[]
-            // setModalVisibility: false,
-            // modalArticleData:{}
+            fullData:[] ,
+
            
         }
-    }
+    } 
+    
     componentDidMount() {
  
 
         this.makeRemoteRequest();
       };
  
-////////////////////////////////
 
       makeRemoteRequest = _.debounce(() => {
         
@@ -53,7 +51,6 @@ class World extends React.Component{
       //
         
     },250);
-///////////////////////////////////////////////////
     handleSearch = search => { 
         console.log("TEXTTTTTT : ***********************************************************",search); 
         const formatQuery = search.toLowerCase();
@@ -70,7 +67,6 @@ class World extends React.Component{
  
       };
 
-      //////////////////////////////////
       renderHeader = () => {
         const { query } = this.state;
         return (
@@ -83,7 +79,6 @@ class World extends React.Component{
         autoCorrect={false} 
         color="black"
         round={true}
-     //   underlineColorAndroid="#985bef"
          showLoading={true}
         containerStyle={{backgroundColor:"white",borderTopColor:"white",borderBottomColor:"white"}}
         inputContainerStyle={{backgroundColor:"white"}}
@@ -94,9 +89,7 @@ class World extends React.Component{
       };  
      
     render(){
-     //   const y=new Animated.Value(0);
-     //   const onScroll= Animated.event([{ nativeEvent: { contentOffset:{y}}}],{useNativeDriver:true})
-      //  console.log("data : ",this.state.data);
+
     let view = this.state.isLoading ? (
         <View style={[styles.activity, styles.horizontal]}> 
 <ActivityIndicator style={{margin:Dimensions.get('window').height/4}} animating={this.state.isLoading} size='large' color='#900c3f'/>
@@ -104,12 +97,12 @@ class World extends React.Component{
     ) : 
      (
        
-          <View >
+          // <View style={{backgroundColor:MyTheme.colors.background}}>
+
          <FlatList 
-        // scrollEventThrottle={16}
         
        keyExtractor={(item, index) => `${index}`}
-        ListHeaderComponent={this.renderHeader}
+        ListHeaderComponent={this.renderHeader} //this
 
          data={this.state.data}
          renderItem={({item}) => {
@@ -121,21 +114,19 @@ class World extends React.Component{
          }
      
          />
-         </View>
+        //  </View>
          
     )
         return(
-            // <View style={{backgroundColor:this.props.color? 'white' : "#444444"}} >       
             <Container >
-                <Content style={{backgroundColor:this.props.color? "#000000" : 'white' }}>{view}
+                <Content >{view}
                 </Content> 
-                {/* <Contents /> */}
                 </Container> 
-            // </View>
         )
    
 }
 }
+
 const styles=StyleSheet.create({
 container:{
     flex:1,

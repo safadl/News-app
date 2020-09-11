@@ -1,20 +1,13 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { createDrawerNavigator} from '@react-navigation/drawer';
-import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { Container} from 'native-base';
-import {StyleSheet,Dimensions} from 'react-native';
-import {Text} from 'react-native'
+import {StyleSheet,Dimensions,ScrollView,Image} from 'react-native';
 import AllTabs from './AllTabs'
 
 import MyBottomNavigation from './MyBottomNavigation'
 import PopularSources from './PopularSources'
-import {createStackNavigator} from '@react-navigation/stack';
-import{Switch} from 'react-native-paper'
-import sourcesDataItem from './sourcesDataItem';
-import DrawerSources from './DrawerSources';
-import finalSources from './finalSources'
-import MyDStack from './MyDStack'
+
 const Drawer = createDrawerNavigator();
 
 
@@ -25,7 +18,7 @@ function MyDrawer({navigation}, props){
   return(
       <Container> 
       
-  <Drawer.Navigator  drawerContent={()=><PopularSources/>} initialRouteName="Home" 
+  <Drawer.Navigator  drawerContent={()=><ScrollView><Image style={{width:'100%',margin:10,height:200,resizeMode:'cover'}} source={{uri:'https://static.vecteezy.com/system/resources/thumbnails/000/274/622/original/strasno.jpg'}} /><PopularSources /></ScrollView>} initialRouteName="Home" 
     drawerType={dimensions.width >= 768 ? 'permanent' : 'front' }
     //hideStatusBar={true}
     drawerContentOptions={{
@@ -34,8 +27,7 @@ function MyDrawer({navigation}, props){
       }}>
       
      <Drawer.Screen name='Home' component={MyBottomNavigation} />
-     <Drawer.Screen name="Tabs" component={AllTabs} />
-     <Drawer.Screen name="DrawerSources" component={MyDStack} /> 
+     <Drawer.Screen name="Tabs"  component={AllTabs} />
      
     </Drawer.Navigator>
     

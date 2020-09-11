@@ -1,40 +1,31 @@
 import React, { Component,useState} from 'react';
 import {View, Text,StyleSheet,TouchableOpacity} from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+
 import * as firebase from 'firebase'
-//import { TouchableOpacity } from 'react-native-gesture-handler';
 class Login extends Component{
 
-//   const Stack = createStackNavigator();
-
-//     const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-// const [errorMessage,setErrorMessage]=useState("")
 state={
   email:"",
   password:"",
-  errorMessage:null
+  errorMessage:null,
+  success:null
 }
 handleLogin=()=>{
   const {email,password}=this.state
-  firebase.auth().signInWithEmailAndPassword(email,password).catch(error=>this.setState({errorMessage:error.message }))
+  firebase.auth().signInWithEmailAndPassword(email,password).then(this.setState({success:'Login done successfully'})).catch(error=>this.setState({errorMessage:error.message }))
 }
 render(){
 
-  // const [error, setError] = useState();
-  // const {logIn, registerUser} = useAuth();
-  // const [authMode, setAuthMode] = useState('Login');
     return (
     <View style={styles.container}>
       
         <View style={styles.textContainer}>
-     <Text style={styles.text}>Login</Text> 
+     <Text style={styles.text}>Welcome back!</Text> 
    </View>
  <View style={styles.input}>
    <View style={styles.errorMessage}>
-    {this.state.errorMessage&&<Text style={styles.error}>{this.state.errorMessage}</Text>}
+    {this.state.errorMessage&&<Text style={styles.error}>{this.state.errorMessage}</Text>||<Text style={{color:'green'}}>{this.state.success}</Text>}
    </View>
       <TextInput
       
@@ -60,62 +51,25 @@ render(){
       />
      </View>
      <View style={{alignItems:'center'}}>
-     <Button  mode="outlined" onPress={this.handleLogin} style={{width:200}} >
+     <Button  mode="outlined" onPress={ this.handleLogin} style={{width:200}} >
     Sign in
   </Button>
- /
+ 
   </View>
-  {/* <View style={{alignItems:'center'}}>
-     <Button  mode="outlined" onPress={() => console.log('Pressed')} style={{width:200, marginTop:20}} onPress={()=>navigation.navigate('Register')}>
-    Register
-  </Button> */}
-  {/* <Button
-        onPress={async () => {
-          console.log(`${authMode} button pressed with email ${email}`);
-          setError(null);
-          try {
-            if (authMode === 'Login') {
-              await logIn(email, password);
-            } else {
-              await registerUser(email, password);
-              setAuthMode('Login');
-            }
-          } catch (e) {
-            setError(`Operation failed: ${e.message}`);
-          }
-        }}
-        title={authMode}
-      />
-      <Text>{error}</Text>
-      <ToggleAuthModeComponent setAuthMode={setAuthMode} authMode={authMode} /> */}
+  <View style={{alignItems:'center',marginTop:50}}>
+    <Text >New to Newspark?</Text>
+    <TouchableOpacity onPress={()=>this.props.navigation.navigate('Register') } >
+    <Text style={{color:'tomato',margin:15,fontWeight:'bold'}}>Sign Up</Text>
+  </TouchableOpacity>
+ 
+  </View>
+ 
       </View>
       
     )
 }
 }
-// const ToggleAuthModeComponent = ({authMode, setAuthMode}) => {
-//   if (authMode === 'Login') {
-//     return (
-//       <Button
-//         title="Haven't created an account yet? Register"
-//         type="outline"
-//         onPress={async () => {
-//           setAuthMode('Register');
-//         }}
-//       />
-//     );
-//   } else {
-//     return (
-//       <Button
-//         title="Have an account already? Login"
-//         type="outline"
-//         onPress={async () => {
-//           setAuthMode('Login');
-//         }}
-//       />
-//     );
-//   }
-// };
+
 const styles = StyleSheet.create({
     
     container:{
@@ -134,7 +88,7 @@ const styles = StyleSheet.create({
 
     },
     text:{
-        fontSize:50
+        fontSize:30
     },
     error:{
       color:'#E9446A',
@@ -151,81 +105,3 @@ const styles = StyleSheet.create({
     }
 })
 export default Login;
-// import React, {useState} from 'react';
-// import {Button, Text, Input} from 'react-native-elements';
-// import {useAuth} from './AuthProvider';
-
-// // This view has an input for email and password and logs in the user when the
-// // login button is pressed.
-// export default function Login() {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [error, setError] = useState();
-
-//   const {logIn, registerUser} = useAuth();
-
-//   const [authMode, setAuthMode] = useState('Login');
-
-//   return (
-//     <>
-//       <Text h3>{authMode}</Text>
-//       <Input
-//         autoCapitalize="none"
-//         placeholder="email"
-//         onChangeText={setEmail}
-//       />
-//       <Input
-//         secureTextEntry={true}
-//         placeholder="password"
-//         onChangeText={setPassword}
-//       />
-//       <Button
-//         onPress={async () => {
-//           console.log(`${authMode} button pressed with email ${email}`);
-//           setError(null);
-//           try {
-//             if (authMode === 'Login') {
-
-//               await logIn(email, password);
-
-//             } else {
-
-//               await registerUser(email, password);
-
-//               setAuthMode('Login');
-//             }
-//           } catch (e) {
-//             setError(`Operation failed: ${e.message}`);
-//           }
-//         }}
-//         title={authMode}
-//       />
-//       <Text>{error}</Text>
-//       <ToggleAuthModeComponent setAuthMode={setAuthMode} authMode={authMode} />
-//     </>
-//   );
-// }
-
-// const ToggleAuthModeComponent = ({authMode, setAuthMode}) => {
-//   if (authMode === 'Login') {
-//     return (
-//       <Button
-//         title="Haven't created an account yet? Register"
-//         type="outline"
-//         onPress={async () => {
-//           setAuthMode('Register');
-//         }}
-//       />
-//     );
-//   } else {
-//     return (
-//       <Button
-//         title="Have an account already? Login"
-//         type="outline"
-//         onPress={async () => {
-//           setAuthMode('Login');
-//         }}
-//       />
-//     );
-//   }
-// };

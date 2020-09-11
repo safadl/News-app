@@ -1,153 +1,4 @@
-// import React, { Component } from 'react';
-// import {  FlatList,View,Text,StyleSheet,Dimensions,ScrollView,Image} from 'react-native';
-// import {Container,Header,Right,Left,Button,Icon,Body,Title} from 'native-base'
-// import {Switch} from 'react-native-paper'
-// const numColumns =2;
-// import {Surface} from 'react-native-paper'
-// const WIDTH = Dimensions.get('window').width
-// const dataList= [{key:'General', imageUri:require('../images/international.png')},{key:'Science', imageUri:require('../images/flask.png')},{key:'Business', imageUri:require('../images/supermarket.png')},{key:'Health', imageUri:require('../images/heartbeat.png')},{key:'Sports', imageUri:require('../images/bike.png')},{key:'Technology', imageUri:require('../images/brain.png')},,{key:'Entertainement', imageUri:require('../images/game-controller.png')}]
-// class Home extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state={
-//             isSwitchOn:false
-//         }   
-//     }
-//     _renderItem=({item,index})=> {
-//       return(
-//        <View style={styles.itemStyle}>
-          
-//            <Text style={[styles.itemText,{color:this.state.isSwitchOn? 'white': 'black'}]}>{item.key}</Text>
-//            <Image style={{width:50,height:50}} source={item.imageUri} />
-//        </View> 
 
-//       )
-//     }
-//     onToggleSwitch = () => this.setState({
-//         isSwitchOn:!this.state.isSwitchOn
-//       });
-//     render() {
-//         let {container,itemStyle}= styles
-//         return (
-//             <Container>
-//                 <Header androidStatusBarColor={this.state.isSwitchOn? '#000000': '#02b29f'} style={{display:'none'}} iosBarStyle={this.state.isSwitchOn? "light-content" : "dark-content"} style={{backgroundColor:this.state.isSwitchOn? '#000000': 'white'}}  leftComponent={{ icon: 'menu', color: 'white' }}>
-             
-//             <Left>
-            
-//               <Button transparent  >
-//               <Icon
-//               type="Feather"
-//               name='menu'
-//              style={{ color:this.state.isSwitchOn? '#02b29f': '#b0b0b0' }}  
-//               onPress={this.props.navigation.openDrawer}
-            
-//               />
-            
-//               </Button>
-            
-//              </Left>
-           
-//             <Right />
-//             <Body>
-//             <Title style={{fontSize:21, color:this.state.isSwitchOn? 'white': 'black'}}>Categories</Title>
-//           </Body>
-//   {/* <MySwitch /> */}
-//   <Right/>
-  
-  
-//   <Switch 
-//   value={this.state.isSwitchOn} 
-//   onValueChange={this.onToggleSwitch}
-
-//   />
-//              {/* <Button transparent onPress={()=>this.toggleF()}>
-//               <Icon
-//               type="MaterialIcons"
-//               name='brightness-4'
-//               color='#ffff'/>
-//              </Button> */}
-//     {/* <Switch
-//     value={true}
-//     onValueChange={(val) => console.log(val)}
-//     disabled={true}
-//     activeText={'On'}
-//     inActiveText={'Off'}
-//     // circleSize={30}
-//     // barHeight={1}
-//     //circleBorderWidth={3}
-//     backgroundActive={'white'}
-//     //backgroundInactive={'gray'}
-//    // circleActiveColor={'#30a566'}
-//     //circleInActiveColor={'#000000'}
-//     changeValueImmediately={true}
-//     // renderInsideCircle={() => <CustomComponent />} // custom component to render inside the Switch circle (Text, Image, etc.)
-//     changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-//     innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
-//     outerCircleStyle={{}} // style for outer animated circle
-//     renderActiveText={false}
-//     renderInActiveText={false}
-//     switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-//     switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-//     switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
-//     switchBorderRadius={30} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
-//   /> */}
-             
-           
-//           </Header>
-            
-//             <ScrollView style={{backgroundColor:this.state.isSwitchOn? 'black': 'white'}}>
-
-//                 <View style={{justifyContent:'center',alignItems:'center',margin:10}}>
-               
-//             {/* <Text style={{fontSize:50, color:this.state.isSwitchOn? 'white': 'black'}}>Headlines</Text> */}
-//             </View>
-//            <FlatList 
-//            data={dataList}
-//            renderItem={this._renderItem}
-//            keyExtractor={(item,index)=>index.toString() }
-//            numColumns={numColumns}
-//            style={{padding:10}}
-//            />
-//            </ScrollView>
-//            </Container>
-
-//         );
-//     }
-// }
-// const styles = StyleSheet.create({
-//     container:{
-//         flex:1,
-       
-//         paddingTop:40,
-//         margin:2
-//     },
-//     surface: {
-//         padding: 8,
-//         height: 100,
-//         width: 100,
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         elevation: 4,
-//         borderRadius:10
-//       },
-//     itemStyle:{
-//     //backgroundColor:'#851621',
-//     alignItems:'center',
-//     justifyContent:'center',
-//     height:100,
-//     flex:1,
-//     margin:2,
-//     height:WIDTH/numColumns,
-//     borderRadius:40,
-//     borderColor:'black',
-//     borderWidth:0.3
-//     },
-//     itemText:{
-//     // color:'#ffff',
-//      fontSize:30
-//     }
-// })
-// export default Home;
 import * as React from 'react';
 import {
   StatusBar,
@@ -178,7 +29,6 @@ import enter from '../images/enter.png'
 import world from '../images/world.png'
 import general from '../images/general.png'
 import AllTabs from './AllTabs';
-import { ChangePage } from '../redux/actions';
 // https://www.creative-flyers.com
 const BusinessImageUri= Image.resolveAssetSource(Business).uri
 const HealthImageUri= Image.resolveAssetSource(Health).uri
@@ -188,15 +38,7 @@ const techImageUri= Image.resolveAssetSource(tech).uri
 const enterImageUri= Image.resolveAssetSource(enter).uri
 const worldImageUri= Image.resolveAssetSource(world).uri
 const generalImageUri= Image.resolveAssetSource(general).uri
-const pressed0=0;
-const pressed1=1;
-const pressed2=2;
-const pressed3=3;
-const pressed4=4;
-const pressed5=5;
-const pressed6=6;
-const pressed7=7;
-const page=0;
+
 const DATA = [
   {
     title: 'World',
@@ -204,16 +46,14 @@ const DATA = [
     poster:
     worldImageUri,
       //'https://www.creative-flyers.com/wp-content/uploads/2020/07/Afro-vibes-flyer-template.jpg',
-      pressed:pressed0,
       color:'#51bcea'
   },
   {
     title: 'General',
     
     poster:
-    generalImageUri
+    generalImageUri,
     //  'https://www.creative-flyers.com/wp-content/uploads/2019/11/Jungle-Party-Flyer-Template-1.jpg',
-    ,pressed:pressed1,
    
     color:'#c4db6c'
   },
@@ -225,7 +65,7 @@ const DATA = [
     //'https://image.freepik.com/free-vector/business-team-discussing-ideas-startup_74855-4380.jpg'
        //  'https://freeui.design/wp-content/uploads/2018/06/Business-Couple-Illustration-by-Tran-Mau-Tri-Tam-FreeUI.Design-Cover-1200x900.jpg'
       //'https://images.unsplash.com/photo-1570126618953-d437176e8c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=426&q=80',
-      ,pressed:pressed2,
+      ,
       color:'#c41111'
     },
   {
@@ -234,7 +74,7 @@ const DATA = [
     poster:
     techImageUri
       //'https://www.creative-flyers.com/wp-content/uploads/2020/07/Summer-Music-Festival-Poster.jpg',
-      ,pressed:pressed3,
+      ,
       color:'#11a6ab'
       },
   {
@@ -243,7 +83,7 @@ const DATA = [
     poster:
     HealthImageUri
      // 'https://www.creative-flyers.com/wp-content/uploads/2020/06/BBQ-Flyer-Psd-Template.jpg',
-     ,pressed:pressed4,
+     ,
      color:'#5dc3cc'
   },
   {
@@ -252,7 +92,7 @@ const DATA = [
     poster:
     SienceImageUri
      // 'https://www.creative-flyers.com/wp-content/uploads/2020/06/Festival-Music-PSD-Template.jpg',
-     ,pressed:pressed5,
+     ,
      color:'#e47070'
   },
   {
@@ -262,7 +102,7 @@ const DATA = [
     SportsImageUri
    // 'https://static.vecteezy.com/system/resources/previews/000/450/931/non_2x/happy-woman-running-in-the-park-vector-illustration-in-flat-style-concept-illustration-for-healthy-lifestyle-sport-exercising.jpg'
      // 'https://www.creative-flyers.com/wp-content/uploads/2020/06/Summer-Beach-House-Flyer.jpg',
-     ,pressed:pressed6,
+     ,
      color:'#b460cc'
   },
   {
@@ -271,7 +111,7 @@ const DATA = [
     poster:
     enterImageUri
     //  'https://www.creative-flyers.com/wp-content/uploads/2020/06/Summer-Beach-House-Flyer.jpg',
-    ,pressed:pressed7,
+    ,
     color:'#e1691f'
   },
 ];
@@ -314,22 +154,12 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
   const scrollXIndex = React.useRef(new Animated.Value(0)).current;
   const scrollXAnimated = React.useRef(new Animated.Value(0)).current;
   const [index, setIndex] = React.useState(0);
-  //const _goBack = () => console.log('Went back');
 
-  //const _handleSearch = () => console.log('Searching');
-
-  //const _handleMore = () => console.log('Shown more');
-  //const [page,setPage] = React.useState(0);
   const setActiveIndex = React.useCallback((activeIndex) => {
     scrollXIndex.setValue(activeIndex);
     setIndex(activeIndex);
   });
 
-//   whatPage= pagee  = {
-//     setState({
-//         orderId
-//     });
-// }
 
 
 
@@ -348,7 +178,6 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
       useNativeDriver: true,
     }).start();
   });
-{/* <AllTabs Actpage={page}/> */}
   return (
     
     <FlingGestureHandler
@@ -378,22 +207,13 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
           
 
         <SafeAreaView style={styles.container}>
-       
-        {/* <Appbar.Header style={{backgroundColor:'white', marginLeft:Dimensions.get('window').width*0.18, marginBottom:10,marginTop:10}}>
-      {/* <Appbar.BackAction onPress={_goBack} /> */}
-      {/* <Appbar.Content title="CATEGORIES" titleStyle={{fontSize:25,letterSpacing:5,fontWeight:'bold'}}  /> */}
-      {/* <Appbar.Action icon="magnify" onPress={_handleSearch} /> */}
-      {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}
-    {/* </Appbar.Header>   */}
-      {/* #89d9c1 */}
+   
      
           
           <StatusBar hidden />
          
           <OverflowItems data={data} scrollXAnimated={scrollXAnimated}  />
-          {/* <Button labelStyle={{color:'#02b29f'}}style={{width:200, borderColor:'#02b29f'}}icon="newspaper" mode="outlined" onPress={()=>navigation.navigate('tabs')}>
-                  Go to articles
-                </Button> */}
+
 
         <FlatList
         
@@ -423,11 +243,9 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
               const newStyle = [style, { zIndex: data.length - index }];
               return (
                 <View style={newStyle} index={index} {...props}>
-                                  {/* <Button title='press'onPress={()=>console.log('pressed')}/> */}
-                      {/* <TouchableOpacity onPress={()=>console.log('pressed')}> */}
+          
  
                   {children}
-                  {/* </TouchableOpacity> */}
                 </View>
               );
             }}
@@ -465,11 +283,9 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
                     ],
                   }}
                 >   
-                    {/* <AllTabs isPressed={item.pressed}/> */}
                     <TouchableHighlight style={{ width: ITEM_WIDTH,
                   height: ITEM_HEIGHT, borderRadius: 14, }} onPress={()=> navigation.navigate('tabs')} >
                   <Image
-               //   source={require('../images/Business.png')}
                     source={ {uri:item.poster}}
                     style={{
                       width: ITEM_WIDTH,

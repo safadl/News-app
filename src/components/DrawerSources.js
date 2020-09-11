@@ -26,7 +26,7 @@ render(){
 
 <View />
 <View>
-<TouchableOpacity  onPress={()=>this.props.navigation.navigate("finalSources")} style={{padding:3,flexDirection:'row'}}>
+<TouchableOpacity  style={{padding:3,flexDirection:'row'}}>
   <Icon   style={{width:40}}name='md-newspaper-outline' />
   <Title  style={{fontSize:15}}>{this.data.name}</Title>
 </TouchableOpacity>

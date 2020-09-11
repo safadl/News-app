@@ -80,7 +80,6 @@ class PopularSources extends React.Component{
         </View>     
     )
         return(
-            // <View style={{backgroundColor:this.props.color? 'white' : "#444444"}} >       
           
             <DrawerContentScrollView {...this.props}>
             <View
@@ -89,10 +88,8 @@ class PopularSources extends React.Component{
               }
             >
       
-              <View  style={styles.userInfoSection}>
-            
-      
-              <Drawer.Section title="Popular Sources" >
+          <View  style={styles.userInfoSection}>
+         <Drawer.Section title="Popular Sources" >
                
                   <View style={styles.preference}>
                  
@@ -105,8 +102,6 @@ class PopularSources extends React.Component{
             </View>
             </View>
           </DrawerContentScrollView>
-            // <Container><Content style={{backgroundColor:this.props.color? "#000000" : 'white' }}>{view}</Content></Container> 
-            // </View>
         )
    
 }

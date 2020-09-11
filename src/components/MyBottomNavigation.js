@@ -11,16 +11,51 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity,Button} from 'react-native'
 import {Icon} from 'react-native-elements'
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { TouchableHighlight } from 'react-native-gesture-handler';
-import sourcesDataItem from './sourcesDataItem';
-import DrawerSources from './DrawerSources'
-import finalSources from './finalSources'
-import PopularSources from './PopularSources'
-import MyDStack from './MyDStack'
-import Register from './Register'
-//import StackNav from './MyStack'
-const Stack = createStackNavigator();
 
+import Register from './Register'
+const Stack = createStackNavigator();
+const SStack = createStackNavigator();
+const AStack=createStackNavigator();
+function AuthStack(){
+  return (
+    <Stack.Navigator initialRouteName='Login'>
+      <Stack.Screen name='Login' component={Login}/>
+      <Stack.Screen name='Register' component={Register} />
+    </Stack.Navigator>
+  )
+}
+function SavedStack({navigation}){
+  const { colors } = useTheme();
+
+  return (
+    <Stack.Navigator>
+<SStack.Screen title="Saved articles"name="Saved" component={SavedScreen} options={{
+   title:"Saved articles" ,
+
+// headerRight:()=>(
+// <Switch 
+// value={true} 
+// onValueChange={console.log('toggled')}
+
+//   />  
+// ),
+headerLeft:(props)=>(
+    <TouchableOpacity onPress={navigation.openDrawer}>
+
+      <Icon
+        size={35}
+        type="ionicon"
+        name={Platform.OS === "ios" ? "ios-menu" : "menu-outline"}
+        onPress={navigation.openDrawer}
+        color={colors.text}
+      />
+      </TouchableOpacity>
+
+)}}
+ />
+</Stack.Navigator>
+  )
+}
 function MyStack({navigation}){
   const { colors } = useTheme();
 
@@ -45,20 +80,16 @@ title: 'Categories',headerTitleAlign:'center',headerStyle:{height:70},headerTitl
      component={Home} 
 
  />
-
 <Stack.Screen options={{
-   title:"Tabs" ,
- 
-// headerStyle: {
-//   backgroundColor: '#f4511e'
-// },
-// headerTintColor: '#fff',
-headerRight:()=>(
-<Switch 
-  value={true} 
- onValueChange={console.log('toggled')}
-  />  
-),
+   title:"News" ,
+
+// headerRight:()=>(
+// <Switch 
+// value={true} 
+// onValueChange={console.log('toggled')}
+
+//   />  
+// ),
 headerLeft:(props)=>(
     <TouchableOpacity onPress={navigation.openDrawer}>
 
@@ -76,7 +107,10 @@ headerLeft:(props)=>(
  }} name="tabs" component={Tabs}
  
  />
- <Stack.Screen name="DrawerSources" component={MyDStack} />
+ <Stack.Screen name='login' component={Login} />
+ <Stack.Screen name='Register' component={Register} />
+
+
 </Stack.Navigator>
 
   
@@ -84,39 +118,6 @@ headerLeft:(props)=>(
   );
 
 };
-
-// const MyBottomNavigation = () => {
-//     const [index, setIndex] = React.useState(0);
-//     const [routes] = React.useState([
-//       { key: 'home', title: 'Home', icon: 'home-outline'},
-//       { key: 'saved', title: 'Saved', icon: 'heart-outline' },
-//       { key: 'login', title: 'Account', icon:'face' },
-//       { key: 'MyStack', title: 'Nav'},
-
-
-//     ]);
-  
-//     const renderScene = BottomNavigation.SceneMap({
-     
-//       home:Home,
-//      saved:SavedScreen,
-//      login:Login,
-//       MyStack:MyStack
-//     });
-  
-//     return (
-//       <BottomNavigation
-//       shifting={true}
-//         navigationState={{ index, routes }}
-//         onIndexChange={setIndex}
-//         renderScene={renderScene}
-//         barStyle={{backgroundColor:'white'}}
-//         activeColor='#02b29f'
-//         //'#02b29f'
-//       />
-//       );
-//     };
-// export default MyBottomNavigation;
 
 const Tab = createBottomTabNavigator();
 
@@ -158,9 +159,9 @@ const MyBottomTabNavigation = () => {
         barStyle={{backgroundColor:'white'}}
         activeColor='#02b29f'>
       <Tab.Screen name="Home" component={MyStack}  />
-      <Tab.Screen name="Saved" component={SavedScreen} />
-      <Tab.Screen name="Account" component={Login} />
-      <Tab.Screen name="Register" component={Register} />
+      <Tab.Screen name="Saved" component={SavedStack} />
+      <Tab.Screen name="Account" component={AuthStack} />
+    {/* <Tab.Screen name="Register" component={Register} /> */}
 
 
     </Tab.Navigator>
