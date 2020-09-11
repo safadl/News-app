@@ -59,10 +59,10 @@ render(){
   
    <Tabs   ref={(c)=> {this.tabs = c;return;} }
    renderTabBar={()=> <ScrollableTab style={{height:80}} />} tabBarUnderlineStyle={{borderBottomWidth:1}} >
-
+{/* 
           <Tab heading="World" tabStyle={{backgroundColor:'white' }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#900c3f', fontWeight: 'bold'}} titleFontSize = {{fontSize:"100"}}>
             <World />
-          </Tab>
+          </Tab> */}
           <Tab heading="General"  tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#89d9c1', fontWeight: 'bold'}}>   
           <General />
 

@@ -40,14 +40,14 @@ const worldImageUri= Image.resolveAssetSource(world).uri
 const generalImageUri= Image.resolveAssetSource(general).uri
 
 const DATA = [
-  {
-    title: 'World',
+  // {
+  //   title: 'World',
    
-    poster:
-    worldImageUri,
-      //'https://www.creative-flyers.com/wp-content/uploads/2020/07/Afro-vibes-flyer-template.jpg',
-      color:'#51bcea'
-  },
+  //   poster:
+  //   worldImageUri,
+  //     //'https://www.creative-flyers.com/wp-content/uploads/2020/07/Afro-vibes-flyer-template.jpg',
+  //     color:'#51bcea'
+  // },
   {
     title: 'General',
     
