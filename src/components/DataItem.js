@@ -7,23 +7,20 @@ import { WebView } from 'react-native-webview';
 
 
 
- class DataItem extends Component{
+class DataItem extends Component{
 constructor(props){
     super(props);
     this.data=props.data;
     this.fullData=props.data
     this.state={
-    //  y:Animated.value,
       showModal : false,
       FillIcon:false,
       search:'',
-      fullData:props.data,
-     
+      fullData:props.data,     
 
     }
 
 }
-
 hideModal(){
   this.setState({
     showModal:!this.state.showModal
@@ -107,9 +104,8 @@ IconVisible(){
               source={{uri: this.data.url}}
               renderLoading={this.ActivityIndicatorLoadingView} 
               />
-      </View>
+         </View>
      <View style={{flexDirection:'row', flexWrap:'wrap', padding:5}}> 
-      {/* <Button style={{marginLeft:20}} title="Share"onPress={()=>this.shareArticle(this.data.url)} /> */}
       <Icon name="share" type="SimpleLineIcons" style={{color:'white'}} onPress={()=>this.shareArticle(this.data.url)} />
       </View>
   </View>
@@ -140,6 +136,9 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
+    backgroundColor:'#0cf2b4'
+    
+
    
   },
   submit:{

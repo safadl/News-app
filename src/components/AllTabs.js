@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import World from './World';
 import General from './General';
 import Business from './Business'
 import Health from './Health'
@@ -9,14 +8,18 @@ import Sports from './Sports'
 import Entertainment from './Entertainment'
 import {Container,Header, Button, Left, Right,Tab,Icon, Tabs, ScrollableTab} from 'native-base';
 import {NativeModules,processColor,StyleSheet,Text, useColorScheme} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 
-export default class AllTabs extends Component{
+function AllTabs({navigation,props}){
+  var theme=useTheme();
+  return <MyTabs navigation={navigation}  text={theme.colors.text} border={theme.colors.border} background={theme.colors.background}/>
+}
+class MyTabs extends Component{
   constructor(props){
     super(props);
    
     this.state={
-      toggle:true,
-      isSwitchOn:false,
+      switch:false,
 
 
     }  
@@ -30,16 +33,10 @@ export default class AllTabs extends Component{
 
   }
  
- 
-  toggleF(){
-    this.setState({
-  toggle:!this.state.toggle 
-})
-console.log(this.state.toggle)
-}
+
 
 onToggleSwitch = () => this.setState({
-  isSwitchOn:!this.state.isSwitchOn
+ switch:!this.state.switch
 });
 
 changeValue=(itemValue)=>{
@@ -50,40 +47,37 @@ changeValue=(itemValue)=>{
   console.log(this.state.country)
 }
 render(){
- 
+  var {text}=this.props;
+  var {border}=this.props;
+  var {background}=this.props;
   return (
  
    <Container style={styles.container}>
-
-
   
-   <Tabs   ref={(c)=> {this.tabs = c;return;} }
-   renderTabBar={()=> <ScrollableTab style={{height:80}} />} tabBarUnderlineStyle={{borderBottomWidth:1}} >
-{/* 
-          <Tab heading="World" tabStyle={{backgroundColor:'white' }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#900c3f', fontWeight: 'bold'}} titleFontSize = {{fontSize:"100"}}>
-            <World />
-          </Tab> */}
-          <Tab heading="General"  tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#89d9c1', fontWeight: 'bold'}}>   
+   <Tabs tabStyle={{backgroundColor:'white'}}  ref={(c)=> {this.tabs = c;return;} }
+   renderTabBar={()=> <ScrollableTab style={{height:80}} />} tabBarUnderlineStyle={{borderBottomWidth:0.5}} >
+
+          <Tab heading="General" textStyle={{color:'#6200ee'}} tabStyle={{ backgroundColor: 'white',}}  activeTabStyle={{ backgroundColor: 'white'}} activeTextStyle={{color: '#0cf2b4' , fontWeight: 'bold'}}>   
           <General />
 
           </Tab>
-          <Tab heading="Business" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white" }} activeTextStyle={{color: '#ff5f40', fontWeight: 'bold'}} >
+          <Tab heading="Business" textStyle={{color:'#6200ee'}}   tabStyle={{ backgroundColor: 'white'}}  activeTabStyle={{ backgroundColor: 'white'}} activeTextStyle={{color: '#0cf2b4', fontWeight: 'bold'}}  >
           <Business /> 
           </Tab>
          
-          <Tab heading="Technology" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white" }} activeTextStyle={{color: '#14b1ab', fontWeight: 'bold'}}>
+          <Tab heading="Technology" textStyle={{color:'#6200ee'}}  tabStyle={{ backgroundColor: 'white'}}  activeTabStyle={{ backgroundColor: 'white'}}activeTextStyle={{color: '#0cf2b4', fontWeight: 'bold'}}>
             <Technology  />
           </Tab>
-          <Tab heading="Health" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white" }} activeTextStyle={{color: '#5fdde5', fontWeight: 'bold'}}>
+          <Tab heading="Health" textStyle={{color:'#6200ee'}}  tabStyle={{ backgroundColor: 'white'}}  activeTabStyle={{ backgroundColor: 'white'}} activeTextStyle={{color: '#0cf2b4', fontWeight: 'bold'}}>
             <Health  />
           </Tab>
-          <Tab heading="Science" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white" }} activeTextStyle={{color: '#ff9a76', fontWeight: 'bold'}}>
+          <Tab heading="Science" textStyle={{color:'#6200ee'}}  tabStyle={{ backgroundColor: 'white'}}  activeTabStyle={{ backgroundColor: 'white'}} activeTextStyle={{color: '#0cf2b4', fontWeight: 'bold'}}>
             <Science  />
           </Tab>
-          <Tab heading="Sports" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{ backgroundColor: "white"}} activeTextStyle={{color: '#844685', fontWeight: 'bold'}}>
+          <Tab heading="Sports" textStyle={{color:'#6200ee'}}  tabStyle={{ backgroundColor: 'white'}}  activeTabStyle={{ backgroundColor: 'white'}} activeTextStyle={{color:'#0cf2b4', fontWeight: 'bold'}}>
             <Sports   />
           </Tab>
-          <Tab heading="Entertainment" tabStyle={{ backgroundColor: "white" }} activeTabStyle={{backgroundColor: "white"}} activeTextStyle={{color: '#dd7631', fontWeight: 'bold'}}>
+          <Tab heading="Entertainment" textStyle={{color:'#6200ee'}}  tabStyle={{ backgroundColor: 'white'}}  activeTabStyle={{ backgroundColor: 'white'}} activeTextStyle={{color:'#0cf2b4', fontWeight: 'bold'}}>
             <Entertainment   />
           </Tab>
         </Tabs>
@@ -128,3 +122,4 @@ const styles = StyleSheet.create({
   
 });
 
+export default AllTabs;

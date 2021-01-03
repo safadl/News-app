@@ -6,8 +6,13 @@ import DataItem from './DataItem'
 import { SearchBar} from 'react-native-elements';
 import _ from 'lodash'
 import {Picker} from '@react-native-community/picker';
+import {useTheme} from '@react-navigation/native';
 
-class General extends React.Component{
+function General({navigation,props}){
+  var theme=useTheme();
+  return <GeneralScreen navigation={navigation}  text={theme.colors.text} border={theme.colors.border} background={theme.colors.background}/>
+}
+class GeneralScreen extends React.Component{
     constructor(props){
         super(props);
         this.state={
@@ -75,7 +80,7 @@ class General extends React.Component{
           <SearchBar
         
         placeholder="Search..."
-      
+       
         value={query}
         lightTheme={true}
         autoCorrect={false} 
@@ -95,6 +100,9 @@ class General extends React.Component{
 
 
     render(){
+      var {text}=this.props;
+      var {border}=this.props;
+      var {background}=this.props;
       //  console.log("data : ",this.state.data);
     let view = this.state.isLoading ? (
         <View style={{justifyContent:'center', textAlign:'center'}}> 
@@ -104,6 +112,7 @@ class General extends React.Component{
     (
         
         <FlatList
+        style={{backgroundColor:background}}
         keyExtractor={(item, index) => `${index}`}
         ListHeaderComponent={this.renderHeader} 
         data={this.state.data}
@@ -119,14 +128,15 @@ class General extends React.Component{
     )
         return(
             // <View style={{backgroundColor:this.props.color? 'white' : "#444444"}} >       
-            <Container><Picker
+            <Container style={{backgroundColor:background}}><Picker
             selectedValue={this.state.country}
-              style={{height: 50, width: 200, alignSelf:'center',margin:15}}
+              style={{height: 50, width: 200, alignSelf:'center',margin:15,color:text,backgroundColor:background}}
+              
               onValueChange={(itemValue) =>
             this.changeValue(itemValue) 
               }>
-              <Picker.Item label="Select a country" value="" />
-              <Picker.Item label="Argentina" value="ar" />
+              <Picker.Item  label="Select a country" value="" />
+              <Picker.Item  label="Argentina" value="ar" />
               <Picker.Item label="Austria" value="at"/>
               <Picker.Item label="Australia" value="au"/>
               <Picker.Item label='Belgium' value="be" />
@@ -177,7 +187,7 @@ class General extends React.Component{
               <Picker.Item label="USA" value="us" />
               <Picker.Item label="Ukraine" value="ua" />
               <Picker.Item label="Venezuela" value="ve" />
-            </Picker><Content style={{backgroundColor:this.props.color? "#000000" : 'white' }}>{view}</Content></Container> 
+            </Picker><Content style={{backgroundColor:background }}>{view}</Content></Container> 
             // </View>
         )
    

@@ -1,18 +1,16 @@
 
 
 import 'react-native-gesture-handler';
-import React,{Component,useState,useEffect} from 'react';
-import { NavigationContainer,DarkTheme, DefaultTheme} from '@react-navigation/native';
+import React,{useEffect} from 'react';
+import { NavigationContainer,DarkTheme, LightTheme} from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
-import Tabs from './src/components/AllTabs';
-import Home from './src/components/Home';
-import saved from './src/components/SavedScreen'
-import BottomNavigation from './src/components/MyBottomNavigation'
-import MyBottomNavigation from './src/components/MyBottomNavigation';
-import MyDrawer from './src/components/MyDrawer';
-import {Switch} from 'react-native-paper'
+
+import MyDrawer from './src/navigation/MyDrawer';
 import SplashScreen from 'react-native-splash-screen'
 import * as firebase from 'firebase'
+import {Provider} from 'react-redux'
+import {store} from './src/redux/store/store'
+import {useSelector,useDispatch} from 'react-redux'
 
 var firebaseConfig = {
   apiKey: "AIzaSyCbMbs-UR4YD-IGXzulSE6Go52DMrNdkCE",
@@ -29,9 +27,18 @@ firebase.initializeApp(firebaseConfig);
 //firebase.analytics();
 
 const Stack = createStackNavigator();
+const AppWrapper = () => {
+  const data=useSelector((state)=>state);
+  const {Theme}=data;
+  return (
 
-export default function App(){
-  const [Mytheme,setTheme]= React.useState(false)
+<NavigationContainer theme={Theme ? DarkTheme: LightTheme}>
+<MyDrawer/>
+</NavigationContainer>
+
+  )
+}
+ const App=()=>{
 
   console. disableYellowBox = true
   useEffect(()=>{
@@ -39,53 +46,10 @@ export default function App(){
   },)
   return (
 
-
- <NavigationContainer theme={Mytheme ? DarkTheme: DefaultTheme}>
-<MyDrawer theme={Mytheme}/>
-</NavigationContainer>
+    <Provider store={store}>
+<AppWrapper/>
+</Provider>
   );
 
 };
-
-// import React from 'react';
-// import {SafeAreaView, View, StatusBar} from 'react-native';
-// import {Button} from 'react-native-elements';
-// import {Login} from './src/components/Login';
-// import {AuthProvider,useAuth} from './src/components/AuthProvider'
-
-// const App = () => {
-//   return (
-
-//     <AuthProvider>
-
-//       {AppBody()}
-
-//     </AuthProvider>
-
-//   );
-// };
-
-// // The AppBody is the main view within the App. If a user is not logged in, it
-// // renders the login view. Otherwise, it renders the tasks view. It must be
-// // within an AuthProvider.
-// function AppBody() {
-
-//   const {user, logOut} = useAuth();
-
-//   return (
-//     <>
-//       <StatusBar barStyle="dark-content" />
-//       <SafeAreaView>
-//         <View>
-//           {user == null ? (
-//             <Login />
-//           ) : (
-//             <Button onPress={logOut} title="Log Out" />
-//           )}
-//         </View>
-//       </SafeAreaView>
-//     </>
-//   );
-// }
-
-// export default App;
+export default App;

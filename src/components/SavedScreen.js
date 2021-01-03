@@ -63,52 +63,24 @@ class SavedScreen extends Component {
         return (
     
             <SafeAreaView >
-            {/* <FlatList
-              data={DATA}
-              renderItem={this.renderItem} 
-              keyExtractor={(item) => item.id}
-              ItemSeparatorComponent={
-                Platform.OS !== 'android' &&
-                (({ highlighted }) => (
-                  <View
-                    style={[
-                      style.separator,
-                      highlighted && { marginLeft: 0, borderWidth:1, borderColor:'black' }
-                    ]}
-                  />
-                ))
-              }
-            /> */}
+          
                   <ScrollView style={{padding:2}}>
 
                <FlatList
-          horizontal={true} 
+               horizontal={true} 
            showsHorizontalScrollIndicator={false} 
            keyExtractor={(item) => item.id}
 
           data={DATA}
           renderItem={ ({ item, index }) => (
-      //       <View style={{flexDirection:'row', paddingBottom:20, paddingTop:10, justifyContent:'center'}}>
-      // <Image source={{uri:item.image}} // Use item to set the image source
-      //   key={index} // Important to set a key for list items
-      //   style={{
-      //     width:300,
-      //     borderRadius:15,
-      //     height:300,
-      //     borderWidth:2,
-      //     alignSelf:'center',
-      //     resizeMode:'contain',
-      //     margin:8
-      //   }}
-      // />
-      // </View>
+    
       <View style={{padding:5,marginTop:20}}>
       <Card style={{width:300, borderRadius:30}}>
       <Card.Cover style={{width:300,height:300, borderRadius:8}} source={{ uri: item.image }} />
       <Card.Title title="Is there Planets with Oceans?"  />
-    <Card.Content style={{width:200}}>
-    <Paragraph >{item.description}</Paragraph>
-     <Avatar.Icon icon="heart" color='#6200EE' style={{backgroundColor:'white'}} marginLeft={200}/>  
+      <Card.Content style={{width:200}}>
+      <Paragraph >{item.description}</Paragraph>
+      <Avatar.Icon icon="heart" color='#6200EE' style={{backgroundColor:'white'}} marginLeft={200}/>  
         </Card.Content>
     
   </Card>
@@ -122,211 +94,333 @@ class SavedScreen extends Component {
     }
 }
 
-export default SavedScreen;
 
 // import * as React from 'react';
 // import {
 //   StatusBar,
+//   Dimensions,
+//   TouchableOpacity,
+//   Animated,
 //   Text,
 //   View,
 //   StyleSheet,
-//   FlatList,
-//   Image,
-//   Dimensions,
-//   Animated,
-//   TouchableOpacity,
-//   Platform,
 // } from 'react-native';
-// const { width, height } = Dimensions.get('window');
-// import { LinearGradient } from 'react-native-linear-gradient';
-// const DATA = [
-//       {
-//         id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-//         title: "Article title",
-//         image:'https://pbs.twimg.com/profile_images/1108430392267280389/ufmFwzIn_400x400.png'
-//       },
-//       {
-//         id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-//         title: "Article title",
-//         image:'https://pbs.twimg.com/profile_images/1108430392267280389/ufmFwzIn_400x400.png'
-//       },
-//       {
-//         id: "58694a0f-3da1-471f-bd96-145571e29d72",
-//         title: "Article title",
-//         image:'https://pbs.twimg.com/profile_images/1108430392267280389/ufmFwzIn_400x400.png'
-//       },
-//     ];
-// const SPACING = 10;
-// const ITEM_SIZE = Platform.OS === 'ios' ? width * 0.72 : width * 0.74;
-// const EMPTY_ITEM_SIZE = (width - ITEM_SIZE) / 2;
-// const BACKDROP_HEIGHT = height * 0.65;
+// import AntDesign from 'react-native-vector-icons/AntDesign'
+// const { width } = Dimensions.get('window');
 
-// const Loading = () => (
-//   <View style={styles.loadingContainer}>
-//     <Text style={styles.paragraph}>Loading...</Text>
-//   </View>
-// );
+// const AnimatedAntDesign = Animated.createAnimatedComponent(AntDesign);
 
-// function Backdrop  ({ data, scrollX }) {
+// const DURATION = 1000;
+// const TEXT_DURATION = DURATION * 0.8;
+
+// const quotes = [
+//   {
+//     quote:
+//       'For the things we have to learn before we can do them, we learn by doing them.',
+//     author: 'Aristotle, The Nicomachean Ethics',
+//   },
+//   {
+//     quote: 'The fastest way to build an app.',
+//     author: 'The Expo Team',
+//   },
+//   {
+//     quote:
+//       'The greatest glory in living lies not in never falling, but in rising every time we fall.',
+//     author: 'Nelson Mandela',
+//   },
+//   {
+//     quote: 'The way to get started is to quit talking and begin doing.',
+//     author: 'Walt Disney',
+//   },
+//   {
+//     quote:
+//       "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking.",
+//     author: 'Steve Jobs',
+//   },
+//   {
+//     quote:
+//       'If life were predictable it would cease to be life, and be without flavor.',
+//     author: 'Eleanor Roosevelt',
+//   },
+//   {
+//     quote:
+//       "If you look at what you have in life, you'll always have more. If you look at what you don't have in life, you'll never have enough.",
+//     author: 'Oprah Winfrey',
+//   },
+//   {
+//     quote:
+//       "If you set your goals ridiculously high and it's a failure, you will fail above everyone else's success.",
+//     author: 'James Cameron',
+//   },
+//   {
+//     quote: "Life is what happens when you're busy making other plans.",
+//     author: 'John Lennon',
+//   },
+// ];
+
+// const Circle = ({ onPress, index, quotes, animatedValue, animatedValue2 }) => {
+//   const { initialBgColor, nextBgColor, bgColor } = colors[index];
+//   const inputRange = [0, 0.001, 0.5, 0.501, 1];
+//   const backgroundColor = animatedValue2.interpolate({
+//     inputRange,
+//     outputRange: [
+//       initialBgColor,
+//       initialBgColor,
+//       initialBgColor,
+//       bgColor,
+//       bgColor,
+//     ],
+//   });
+//   const dotBgColor = animatedValue2.interpolate({
+//     inputRange: [0, 0.001, 0.5, 0.501, 0.9, 1],
+//     outputRange: [
+//       bgColor,
+//       bgColor,
+//       bgColor,
+//       initialBgColor,
+//       initialBgColor,
+//       nextBgColor,
+//     ],
+//   });
+
 //   return (
-//     <View style={{ height: BACKDROP_HEIGHT, width, position: 'absolute' }}>
-//       <FlatList
-      
-//         data={data.reverse()}
-//         keyExtractor={(item) => item.id + '-backdrop'}
-//         removeClippedSubviews={false}
-//         contentContainerStyle={{ width, height: BACKDROP_HEIGHT }}
-//         renderItem={({ item, index }) => {
-          
-//           const translateX = scrollX.interpolate({
-//             inputRange: [(index - 2) * ITEM_SIZE, (index - 1) * ITEM_SIZE],
-//             outputRange: [0, width],
-//             extrapolate:'clamp'
-//           });
-//           return (
-//             <Animated.View
-//               removeClippedSubviews={false}
-//               style={{
-//                 position: 'absolute',
-//                 width: translateX,
-//                 height,
-//                 overflow: 'hidden',
-//               }}
-//             >
-//               <Image
-//                 source={{ uri: item.image }}
-//                 style={{
-//                   width,
-//                   height: BACKDROP_HEIGHT,
-//                   position: 'absolute',
-//                 }}
-//               />
-//             </Animated.View>
-//           );
-//         }}
-//       />
-//       <LinearGradient
-//         colors={['rgba(0, 0, 0, 0)', 'white']}
-//         style={{
-//           height: BACKDROP_HEIGHT,
-//           width,
-//           position: 'absolute',
-//           bottom: 0,
-//         }}
-//       />
-//     </View>
+//     <Animated.View
+//       style={[
+//         StyleSheet.absoluteFillObject,
+//         styles.container,
+//         { backgroundColor },
+//       ]}
+//     >
+//       <Animated.View
+//         style={[
+//           styles.circle,
+//           {
+//             backgroundColor: dotBgColor,
+//             transform: [
+//               { perspective: 200 },
+//               {
+//                 rotateY: animatedValue2.interpolate({
+//                   inputRange: [0, 0.5, 1],
+//                   outputRange: ['0deg', '-90deg', '-180deg'],
+//                 }),
+//               },
+
+//               {
+//                 scale: animatedValue2.interpolate({
+//                   inputRange: [0, 0.5, 1],
+//                   outputRange: [1, 6, 1],
+//                 }),
+//               },
+
+//               {
+//                 translateX: animatedValue2.interpolate({
+//                   inputRange: [0, 0.5, 1],
+//                   outputRange: [0, 50/100, 0],
+//                 }),
+//               },
+//             ],
+//           },
+//         ]}
+//       >
+//         <TouchableOpacity onPress={onPress}>
+//           <Animated.View
+//             style={[
+//               styles.button,
+//               {
+//                 transform: [
+//                   {
+//                     scale: animatedValue.interpolate({
+//                       inputRange: [0, 0.05, 0.5, 1],
+//                       outputRange: [1, 0, 0, 1],
+//                       // extrapolate: "clamp"
+//                     }),
+//                   },
+//                   {
+//                     rotateY: animatedValue.interpolate({
+//                       inputRange: [0, 0.5, 0.9, 1],
+//                       outputRange: ['0deg', '180deg', '180deg', '180deg'],
+//                     }),
+//                   },
+//                 ],
+//                 opacity: animatedValue.interpolate({
+//                   inputRange: [0, 0.05, 0.9, 1],
+//                   outputRange: [1, 0, 0, 1],
+//                 }),
+//               },
+//             ]}
+//           >
+//             <AnimatedAntDesign name='arrowright' size={28} color={'white'} onPress={()=>console.log('press')}/>
+//           </Animated.View>
+//         </TouchableOpacity>
+//       </Animated.View>
+//     </Animated.View>
 //   );
 // };
 
-// export default function SavedScreen() {
-//   const [movies, setMovies] = React.useState([]);
-//   const scrollX = React.useRef(new Animated.Value(0)).current;
-//   // React.useEffect(() => {
-//   //   const fetchData = async () => {
-//   //     const movies = await getMovies();
-//   //     // Add empty items to create fake space
-//   //     // [empty_item, ...movies, empty_item]
-//   //     setMovies([{ key: 'empty-left' }, ...movies, { key: 'empty-right' }]);
-//   //   };
+// /* 
+// initialBgColor -> Big background of the element
+// bgColor -> initial circle bg color that will be the next slide initial BG Color
+// nextBgColor -> next circle bg color after we fully transition the circle and this will be small again
+// prev bgColor === next initialBgColor
+// prev nextBgColor === next bgColor
+// */
 
-//   //   if (movies.length === 0) {
-//   //     fetchData(movies);
-//   //   }
-//   // }, [movies]);
+// const colors = [
+//   {
+//     initialBgColor: 'goldenrod',
+//     bgColor: '#222',
+//     nextBgColor: '#222',
+//   },
+//   {
+//     initialBgColor: 'goldenrod',
+//     bgColor: '#222',
+//     nextBgColor: 'yellowgreen',
+//   },
+//   {
+//     initialBgColor: '#222',
+//     bgColor: 'yellowgreen',
+//     nextBgColor: 'midnightblue',
+//   },
+//   {
+//     initialBgColor: 'yellowgreen',
+//     bgColor: 'midnightblue',
+//     nextBgColor: 'turquoise',
+//   },
+//   {
+//     initialBgColor: 'midnightblue',
+//     bgColor: 'turquoise',
+//     nextBgColor: 'goldenrod',
+//   },
+//   {
+//     initialBgColor: 'turquoise',
+//     bgColor: 'goldenrod',
+//     nextBgColor: '#222',
+//   },
+// ];
 
-//   // if (movies.length === 0) {
-//   //   return <Loading />;
-//   // }
+//  function SavedScreen() {
+//   const animatedValue = React.useRef(new Animated.Value(0)).current;
+//   const animatedValue2 = React.useRef(new Animated.Value(0)).current;
+//   const sliderAnimatedValue = React.useRef(new Animated.Value(0)).current;
+//   const inputRange = [...Array(quotes.length).keys()];
+//   const [index, setIndex] = React.useState(0);
+
+//   const animate = (i) =>
+//     Animated.parallel([
+//       Animated.timing(sliderAnimatedValue, {
+//         toValue: i,
+//         duration: TEXT_DURATION,
+//         useNativeDriver: true,
+//       }),
+//       Animated.timing(animatedValue, {
+//         toValue: 1,
+//         duration: DURATION,
+//         useNativeDriver: true,
+//       }),
+//       Animated.timing(animatedValue2, {
+//         toValue: 1,
+//         duration: DURATION,
+//         useNativeDriver: false,
+//       }),
+//     ]);
+
+//   const onPress = () => {
+//     animatedValue.setValue(0);
+//     animatedValue2.setValue(0);
+//     animate((index + 1) % colors.length).start();
+//     setIndex((index + 1) % colors.length);
+//   };
 
 //   return (
-//     <View style={styles.container}>
-//       <Backdrop data={DATA} scrollX={scrollX} />
+//     <View style={{ flex: 1, justifyContent: 'flex-start', paddingTop: 100 }}>
 //       <StatusBar hidden />
-//       <Animated.FlatList
-//         showsHorizontalScrollIndicator={false}
-//         data={DATA}
-//         keyExtractor={(item) => item.id}
-//         horizontal
-//         bounces={false}
-//         decelerationRate={Platform.OS === 'ios' ? 0 : 0.98}
-//         renderToHardwareTextureAndroid
-//         contentContainerStyle={{ alignItems: 'center' }}
-//         snapToInterval={ITEM_SIZE}
-//         snapToAlignment='start'
-//         onScroll={Animated.event(
-//           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-//           { useNativeDriver: false }
-//         )}
-//         scrollEventThrottle={16}
-//         renderItem={({ item, index }) => {
-//           if (!item.poster) {
-//             return <View style={{ width: EMPTY_ITEM_SIZE }} />;
-//           }
-
-//           const inputRange = [
-//             (index - 2) * ITEM_SIZE,
-//             (index - 1) * ITEM_SIZE,
-//             index * ITEM_SIZE,
-//           ];
-
-//           const translateY = scrollX.interpolate({
-//             inputRange,
-//             outputRange: [100, 50, 100],
-//             extrapolate: 'clamp',
-//           });
-
+//       <Circle
+//         index={index}
+//         onPress={onPress}
+//         quotes={quotes}
+//         animatedValue={animatedValue}
+//         animatedValue2={animatedValue2}
+//       />
+//       <Animated.View
+//         style={{
+//           flexDirection: 'row',
+//           transform: [
+//             {
+//               translateX: sliderAnimatedValue.interpolate({
+//                 inputRange,
+//                 outputRange: quotes.map((_, i) => -i * width * 2),
+//               }),
+//             },
+//           ],
+//           opacity: sliderAnimatedValue.interpolate({
+//             inputRange: [...Array(quotes.length * 2 + 1).keys()].map(
+//               (i) => i / 2
+//             ),
+//             outputRange: [...Array(quotes.length * 2 + 1).keys()].map((i) =>
+//               i % 2 === 0 ? 1 : 0
+//             ),
+//           }),
+//         }}
+//       >
+//         {quotes.slice(0, colors.length).map(({ quote, author }, i) => {
 //           return (
-//             <View style={{ width: ITEM_SIZE }}>
-//               <Animated.View
-//                 style={{
-//                   marginHorizontal: SPACING,
-//                   padding: SPACING * 2,
-//                   alignItems: 'center',
-//                   transform: [{ translateY }],
-//                   backgroundColor: 'white',
-//                   borderRadius: 34,
-//                 }}
+//             <View style={{ paddingRight: width, width: width * 2 }} key={i}>
+//               <Text
+//                 style={[styles.paragraph, { color: colors[i].nextBgColor }]}
 //               >
-//                 <Image
-//                   source={{ uri: item.image }}
-//                   style={styles.posterImage}
-//                 />
-//                 <Text style={{ fontSize: 24 }} numberOfLines={1}>
-//                   {item.title}
-//                 </Text>
-//                 <Text style={{ fontSize: 12 }} numberOfLines={3}>
-//                   {item.title}
-//                 </Text>
-//               </Animated.View>
+//                 {quote}
+//               </Text>
+//               <Text
+//                 style={[
+//                   styles.paragraph,
+//                   {
+//                     color: colors[i].nextBgColor,
+//                     fontSize: 10,
+//                     fontWeight: 'normal',
+//                     textAlign: 'right',
+//                     opacity: 0.8,
+//                   },
+//                 ]}
+//               >
+//                 ______ {author}
+//               </Text>
 //             </View>
 //           );
-//         }}
-//       />
+//         })}
+//       </Animated.View>
 //     </View>
 //   );
 // }
 
 // const styles = StyleSheet.create({
-//   loadingContainer: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
 //   container: {
 //     flex: 1,
+//     justifyContent: 'flex-end',
+//     alignItems: 'center',
+//     paddingTop: 5,
+//     padding: 8,
+//     paddingBottom: 50,
 //   },
 //   paragraph: {
-//     margin: 24,
-//     fontSize: 18,
-//     fontWeight: 'bold',
+//     margin: 12,
+//     fontSize: 24,
+//     // fontWeight: 'bold',
 //     textAlign: 'center',
+//     fontFamily: 'Menlo',
+//     color: 'white',
 //   },
-//   posterImage: {
-//     width: '100%',
-//     height: ITEM_SIZE * 1.2,
-//     resizeMode: 'cover',
-//     borderRadius: 24,
-//     margin: 0,
-//     marginBottom: 10,
+//   button: {
+//     height: 100,
+//     width: 100,
+//     borderRadius: 50,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   circle: {
+//     backgroundColor: 'turquoise',
+//     width: 100,
+//     height: 100,
+//     borderRadius: 50,
 //   },
 // });
+export default SavedScreen;

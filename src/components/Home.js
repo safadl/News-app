@@ -9,7 +9,7 @@ import {
  Text,
   View,
   StyleSheet,
-
+  ImageBackground,
   SafeAreaView,
   
 } from 'react-native';
@@ -22,10 +22,10 @@ import {
 } from 'react-native-gesture-handler';
 import Business from '../images/business2.png'
 import Health from '../images/health.png'
-import Science from '../images/science.png'
-import Sports from '../images/sports.png'
+import Science from '../images/Science.gif'
+import Sports from '../images/sport.gif'
 import tech from '../images/tech.png'
-import enter from '../images/enter.png'
+import enter from '../images/enter.gif'
 import world from '../images/world.png'
 import general from '../images/general.png'
 import AllTabs from './AllTabs';
@@ -116,10 +116,10 @@ const DATA = [
   },
 ];
 
-const OVERFLOW_HEIGHT = 70;
+const OVERFLOW_HEIGHT =320 ;
 const SPACING = 10;
-const ITEM_WIDTH = width * 0.70;
-const ITEM_HEIGHT = ITEM_WIDTH * 1.5;
+const ITEM_WIDTH = width * 0.55;
+const ITEM_HEIGHT = ITEM_WIDTH * 1.2;
 const VISIBLE_ITEMS = 3;
 
 
@@ -136,7 +136,7 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
         {data.map((item, index) => {
           return (
             <View key={index} style={styles.itemContainer}>
-              <Text style={[styles.title,{color:item.color} ]} numberOfLines={1}>
+              <Text style={[styles.title,{color:'white'} ]} numberOfLines={1}>
                 {item.title}
               </Text>
               
@@ -208,7 +208,8 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
 
         <SafeAreaView style={styles.container}>
    
-     
+        <ImageBackground style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height,marginTop:48}} source={require('../images/background.png')} >
+
           
           <StatusBar hidden />
          
@@ -226,7 +227,7 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
               flex: 1,
               justifyContent: 'center',
               padding: SPACING * 2,
-              marginTop: 50,
+              marginTop:-170,
             }}
             scrollEnabled={false}
             removeClippedSubviews={false}
@@ -275,6 +276,7 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
                     left: -ITEM_WIDTH / 2,
                     opacity,
                     Height:200,
+                    marginTop:250,
                     transform: [
                       {
                         translateX,
@@ -304,6 +306,7 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
               <View style={{justifyContent:'center',flexDirection:'row',marginBottom:15,color:'red'}}>
             
                 </View>
+                </ImageBackground>
         </SafeAreaView>
         
       </FlingGestureHandler>
